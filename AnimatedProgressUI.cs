@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Foundation;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     public class AnimatedProgressUI : Panel
     {

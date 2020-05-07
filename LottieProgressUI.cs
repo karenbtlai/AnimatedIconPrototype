@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     public sealed class LottieProgressUI : ProgressUI
     {

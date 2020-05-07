@@ -13,7 +13,7 @@ using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     // Name:        IndeterminateRing
     // Frame rate:  60 fps

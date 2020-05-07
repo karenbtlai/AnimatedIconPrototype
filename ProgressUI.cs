@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Data;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     public class ProgressUI : RangeBase
     {

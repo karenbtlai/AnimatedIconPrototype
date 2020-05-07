@@ -13,7 +13,7 @@ using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     sealed class DeterminateRing : DependencyObject, IAnimatedVisualSource
     {

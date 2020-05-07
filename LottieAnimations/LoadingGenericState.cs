@@ -13,7 +13,7 @@ using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     public sealed class LoadingGenericState : IAnimatedVisualSource
     {
