@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AnimatedIconPrototype"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource SystemChromeLowColor}">
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.Resources>
@@ -27,15 +27,29 @@
 
         <!-- AnimatedIcon Samples -->
         <StackPanel Grid.Column="1" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
-            <local:AnimatedIcon Width="100"   
+            <ToggleButton Background="White">
+                <local:AnimatedIcon Width="36"
+                x:Name="QA_AirplaneMode"
+                IsAnimating="{Binding Mode=OneWay,ElementName=isAnimatingCheckBox, Path=IsChecked}"
+                IsLooping="{Binding Mode=OneWay,ElementName=isLoopingCheckBox, Path=IsChecked}"
+                ProgressPosition="{Binding Mode=OneWay,ElementName=progressSlider, Path=Value}">
+                    <local:AnimatedIcon.Source>
+                        <local:QA_AirplaneMode/>
+                    </local:AnimatedIcon.Source>
+                </local:AnimatedIcon>
+            </ToggleButton>
+
+            <ToggleButton Background="White">
+                <local:AnimatedIcon Width="36"
                 x:Name="TestAnimatedIcon"
                 IsAnimating="{Binding Mode=OneWay,ElementName=isAnimatingCheckBox, Path=IsChecked}"
                 IsLooping="{Binding Mode=OneWay,ElementName=isLoopingCheckBox, Path=IsChecked}"
                 ProgressPosition="{Binding Mode=OneWay,ElementName=progressSlider, Path=Value}">
-                <local:AnimatedIcon.Source>
-                    <local:IndeterminateRing/>
-                </local:AnimatedIcon.Source>
-            </local:AnimatedIcon>
+                    <local:AnimatedIcon.Source>
+                        <local:QA_AirplaneMode/>
+                    </local:AnimatedIcon.Source>
+                </local:AnimatedIcon>
+            </ToggleButton>
         </StackPanel>
 
         <StackPanel Grid.Column="2" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">

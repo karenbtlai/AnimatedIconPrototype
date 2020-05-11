@@ -122,13 +122,8 @@
     </Compile>
     <Compile Include="AnimatedProgressUI.cs" />
     <Compile Include="AnimatedIcon.cs" />
-    <Compile Include="LottieAnimations\DeterminateRing.cs" />
-    <Compile Include="LottieAnimations\IndeterminateRing.cs" />
     <Compile Include="LottieAnimations\LegoLoader.cs" />
-    <Compile Include="LottieAnimations\LoadAnimation.cs" />
-    <Compile Include="LottieAnimations\LoadingErrorState.cs" />
-    <Compile Include="LottieAnimations\LoadingGenericState.cs" />
-    <Compile Include="LottieAnimations\LoadingSuccessState.cs" />
+    <Compile Include="LottieAnimations\QA_AirplaneMode.cs" />
     <Compile Include="LottieProgressUI.cs" />
     <Compile Include="LottieProgressUITemplateSettings.cs" />
     <Compile Include="MainPage.xaml.cs">
