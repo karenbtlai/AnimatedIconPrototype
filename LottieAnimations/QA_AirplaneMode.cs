@@ -60,7 +60,7 @@ namespace AnimatedIconPrototype
     // |________________|_______|_________________|
     // | Foreground     | Color | #FF000000 Black |
     // --------------------------------------------
-    sealed class QA_AirplaneMode : IAnimatedVisualSource
+    sealed class QA_AirplaneMode : ILottieVisualSource
     {
         // Animation duration: 1.000 seconds.
         internal const long c_durationTicks = 10000000;
@@ -102,7 +102,7 @@ namespace AnimatedIconPrototype
             return _themeProperties;
         }
 
-        public IAnimatedVisual TryCreateAnimatedVisual(Compositor compositor, out object diagnostics)
+        public ILottieVisual TryCreateAnimatedVisual(Compositor compositor, out object diagnostics)
         {
             diagnostics = null;
             EnsureThemeProperties(compositor);
@@ -119,7 +119,7 @@ namespace AnimatedIconPrototype
             return null;
         }
 
-        sealed class AnimatedVisual : IAnimatedVisual
+        sealed class AnimatedVisual : ILottieVisual
         {
             const long c_durationTicks = 10000000;
             readonly Compositor _c;

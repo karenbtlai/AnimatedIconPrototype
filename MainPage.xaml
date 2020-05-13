@@ -27,7 +27,16 @@
 
         <!-- AnimatedIcon Samples -->
         <StackPanel Grid.Column="1" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
-            <ToggleButton Background="White">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon Width="36"
+                x:Name="QA_AirplaneMode"
+                IsAnimating="{Binding Mode=OneWay,ElementName=isAnimatingCheckBox, Path=IsChecked}"
+                IsLooping="{Binding Mode=OneWay,ElementName=isLoopingCheckBox, Path=IsChecked}"
+                Glyph="&#xE709;">
+                </local:AnimatedIcon>
+            </ToggleButton>
+
+            <!--<ToggleButton Background="White">
                 <local:AnimatedIcon Width="36"
                 x:Name="QA_AirplaneMode"
                 IsAnimating="{Binding Mode=OneWay,ElementName=isAnimatingCheckBox, Path=IsChecked}"
@@ -37,23 +46,12 @@
                         <local:QA_AirplaneMode/>
                     </local:AnimatedIcon.Source>
                 </local:AnimatedIcon>
-            </ToggleButton>
-
-            <ToggleButton Background="White">
-                <local:AnimatedIcon Width="36"
-                x:Name="TestAnimatedIcon"
-                IsAnimating="{Binding Mode=OneWay,ElementName=isAnimatingCheckBox, Path=IsChecked}"
-                IsLooping="{Binding Mode=OneWay,ElementName=isLoopingCheckBox, Path=IsChecked}"
-                ProgressPosition="{Binding Mode=OneWay,ElementName=progressSlider, Path=Value}">
-                    <local:AnimatedIcon.Source>
-                        <local:QA_AirplaneMode/>
-                    </local:AnimatedIcon.Source>
-                </local:AnimatedIcon>
-            </ToggleButton>
+            </ToggleButton>-->
+            <FontIcon Glyph="&#xE709;"/>
         </StackPanel>
 
         <StackPanel Grid.Column="2" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
-            <local:AnimatedIcon Width="200"   
+            <!--<local:AnimatedIcon Width="200"   
                 x:Name="OnPointerOverAnimatedIcon"
                 IsAnimating="False"
                 IsLooping="False"
@@ -62,7 +60,7 @@
                 <local:AnimatedIcon.Source>
                     <local:LegoLoader/>
                 </local:AnimatedIcon.Source>
-            </local:AnimatedIcon>
+            </local:AnimatedIcon>-->
         </StackPanel>
     </Grid>
 </Page>
