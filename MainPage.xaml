@@ -27,11 +27,12 @@
 
         <!-- AnimatedIcon Samples -->
         <StackPanel Grid.Column="1" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
-            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true" >
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
                 <local:AnimatedIcon
                     x:Name="QA_AirplaneMode"
                     Glyph="&#xE709;"
-                    FontSize="80">
+                    FontSize="40"
+                    Foreground="{ThemeResource SystemControlHighlightAccentBrush}">
                 </local:AnimatedIcon>
             </ToggleButton>
 
@@ -46,8 +47,8 @@
                     </local:AnimatedIcon.Source>
                 </local:AnimatedIcon>
             </ToggleButton>-->
-            <!--<ToggleButton Background="White">
-                <FontIcon Glyph="&#xE709;" FontSize="20" Width="80"/>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE709;" FontSize="40"/>
             </ToggleButton>
 
             <local:AnimatedIcon
@@ -55,7 +56,7 @@
                 x:Name="QA_AirplaneMode2"
                 IsIconController="true"
                 Glyph="&#xE709;">
-            </local:AnimatedIcon>-->
+            </local:AnimatedIcon>
 
         </StackPanel>
 

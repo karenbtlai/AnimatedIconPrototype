@@ -8,6 +8,7 @@ using System.Numerics;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI;
 
 interface ILottieVisual : IDisposable
 {
@@ -26,6 +27,10 @@ namespace AnimatedIconPrototype
 {
     public class AnimatedIcon : Panel
     {
+        // Registration token from the subscription to the color changed property
+        // on the Foreground brush. 0 if not currently subscribed.
+        long _colorPropertyChangedRegistration;
+
         // The Lottie source object, or null.
         ILottieVisualSource _lottieSource;
 
@@ -38,19 +43,25 @@ namespace AnimatedIconPrototype
         // A visual used for scaling and offsetting the animated icon.
         ContainerVisual _rootVisual;
 
+        // The Foreground brush, iff it's a SolidColorBrush.
+        SolidColorBrush _foregroundSolidColorBrush;
+
         // The UIElement above this in the visual tree that has been annotated
         // with the IsIconController=true attached property.
         UIElement _controller;
 
         public AnimatedIcon()
         {
+            // Add FontIcon to Panel for for fallback
             FontIcon fontText = new FontIcon();
             fontText.Glyph = Glyph;
-
             Children.Add(fontText);
 
             Loaded += AnimatedIcon_Loaded;
         }
+
+        // Converts a Color to a Vector4 value, as required by Lottie animations.
+        static Vector4 ColorAsVector4(Color color) => new Vector4(color.R, color.G, color.B, color.A);
 
         void AnimatedIcon_Loaded(object sender, RoutedEventArgs e)
         {
@@ -163,6 +174,72 @@ namespace AnimatedIconPrototype
         {
             var animatedIcon = d as AnimatedIcon;
             animatedIcon.UpdateSize();
+        }
+
+        public Brush Foreground
+        {
+            get { return (Brush)GetValue(ForegroundProperty); }
+            set { SetValue(ForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty ForegroundProperty =
+            DependencyProperty.Register("Foreground", typeof(Brush), typeof(AnimatedIcon), new PropertyMetadata(null, new PropertyChangedCallback(OnForegroundChanged)));
+
+        // Handles ForegroundProperty change notifications.
+        // Sets the Foreground of the Lottie (if one exists) to the color
+        // of the Foreground brush (if it's a SolidColorBrush).
+        private static void OnForegroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var self = (AnimatedIcon)d;
+            self.RegisterColorChangeCallback(self.Foreground as SolidColorBrush);
+            self.UpdateLottieForegroundColor();
+        }
+
+        // Register with the given SolidColorBrush to receive notifications whenever
+        // the Color property changes.
+        void RegisterColorChangeCallback(SolidColorBrush colorBrush)
+        {
+            if (colorBrush != _foregroundSolidColorBrush)
+            {
+                UnregisterColorPropertyChangedCallback();
+                _foregroundSolidColorBrush = colorBrush;
+                if (colorBrush != null)
+                {
+                    _colorPropertyChangedRegistration =
+                        _foregroundSolidColorBrush.RegisterPropertyChangedCallback(
+                            SolidColorBrush.ColorProperty,
+                            OnForegroundBrushColorChanged);
+                }
+            }
+        }
+
+        void UnregisterColorPropertyChangedCallback()
+        {
+            if (_colorPropertyChangedRegistration != 0)
+            {
+                _foregroundSolidColorBrush.UnregisterPropertyChangedCallback(
+                    SolidColorBrush.ColorProperty,
+                    _colorPropertyChangedRegistration);
+
+                _foregroundSolidColorBrush = null;
+            }
+        }
+
+        // Called for each change in the color of the Foreground brush.
+        void OnForegroundBrushColorChanged(DependencyObject d, DependencyProperty p)
+            => UpdateLottieForegroundColor();
+
+        // Sets the color of the Lottie "Foreground" property to the color of
+        // the Foreground brush, or to transparent if the brush is not a
+        // SolidColorBrush.
+        void UpdateLottieForegroundColor()
+        {
+            if (_lottieSource != null)
+            {
+                var color = _foregroundSolidColorBrush is null ? Colors.Transparent : _foregroundSolidColorBrush.Color;
+                var themeProperties = _lottieSource.GetThemeProperties(Window.Current.Compositor);
+                themeProperties.InsertVector4("Foreground", ColorAsVector4(color));
+            }
         }
 
         public static DependencyProperty IsIconControllerProperty { get; } =
