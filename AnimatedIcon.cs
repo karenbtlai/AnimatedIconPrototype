@@ -73,14 +73,12 @@ namespace AnimatedIconPrototype
 
         protected override Size MeasureOverride(Size availableSize)
         {
-            var desiredSize = new Size();
 
             FrameworkElement child = (FrameworkElement)Children[0];
-
             child.Measure(availableSize);
-            desiredSize = child.DesiredSize;
 
-            return desiredSize;
+            var fontSize = FontSize;
+           return new Size(fontSize, fontSize);
         }
 
         protected override Size ArrangeOverride(Size finalSize)
@@ -88,55 +86,28 @@ namespace AnimatedIconPrototype
             FrameworkElement child = (FrameworkElement)Children[0];
             child.Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
 
-            return finalSize;
+            var lottieNaturalSize = _lottieInstance.Size;
+
+            // Calculate the scale that needs to be applied in order to make the
+            // Lottie animation fit inside the given size.
+            var scale = new Size(finalSize.Width / lottieNaturalSize.X, finalSize.Height / lottieNaturalSize.Y);
+
+            // Adjust the scale to make it uniform (same scaling for width and height).
+            var smallestScaleDimension = Math.Min(scale.Width, scale.Height);
+
+            // Calculate the size of the Lottie animation after scaling.
+            var scaledLottieSize = new Size(lottieNaturalSize.X * smallestScaleDimension, lottieNaturalSize.Y * smallestScaleDimension);
+
+            // Scale the Lottie to fit.
+            _rootVisual.Scale = new Vector3((float)smallestScaleDimension);
+
+            // Center the animation within the available space.
+            _rootVisual.Offset = new Vector3(
+                                        (float)((finalSize.Width - scaledLottieSize.Width) / 2),
+                                        (float)((finalSize.Height - scaledLottieSize.Height) / 2),
+                                        0);
+            return scaledLottieSize;
         }
-
-        public bool IsAnimating
-        {
-            get { return (bool)GetValue(IsAnimatingProperty); }
-            set { SetValue(IsAnimatingProperty, value); }
-        }
-
-        public static readonly DependencyProperty IsAnimatingProperty =
-            DependencyProperty.Register("IsAnimating", typeof(bool), typeof(AnimatedIcon), new PropertyMetadata(true, new PropertyChangedCallback(OnIsAnimatingChanged)));
-
-        private static void OnIsAnimatingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var animatedIcon = d as AnimatedIcon;
-            animatedIcon.UpdateStates();
-        }
-
-        public bool IsLooping
-        {
-            get { return (bool)GetValue(IsLoopingProperty); }
-            set { SetValue(IsLoopingProperty, value); }
-        }
-
-        public static readonly DependencyProperty IsLoopingProperty =
-            DependencyProperty.Register("IsLooping", typeof(bool), typeof(AnimatedIcon), new PropertyMetadata(true, new PropertyChangedCallback(OnIsLoopingChanged)));
-
-        private static void OnIsLoopingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var animatedIcon = d as AnimatedIcon;
-            animatedIcon.UpdateStates();
-        }
-
-        //public double ProgressPosition
-        //{
-        //    get { return (double)GetValue(ProgressPositionProperty); }
-        //    set { SetValue(ProgressPositionProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty ProgressPositionProperty =
-        //    DependencyProperty.Register("ProgressPosition", typeof(double), typeof(AnimatedIcon), new PropertyMetadata(0, new PropertyChangedCallback(OnProgressPositionChanged)));
-
-        //private static void OnProgressPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    var animatedIcon = d as AnimatedIcon;
-        //    animatedIcon.UpdateProgressPosition(animatedIcon.ProgressPosition);
-        //}
-
-
 
         public string Glyph
         {
@@ -179,27 +150,27 @@ namespace AnimatedIconPrototype
             }
         }
 
+        public double FontSize
+        {
+            get { return (double)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty FontSizeProperty =
+            DependencyProperty.Register("FontSize", typeof(double), typeof(AnimatedIcon), new PropertyMetadata((double)20, new PropertyChangedCallback(OnFontSizeChanged)));
+
+        private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var animatedIcon = d as AnimatedIcon;
+            animatedIcon.UpdateSize();
+        }
+
         public static DependencyProperty IsIconControllerProperty { get; } =
             DependencyProperty.RegisterAttached(
                 "IsIconController",
                 typeof(bool),
                 typeof(AnimatedIcon),
                 new PropertyMetadata(false));
-
-        //public IAnimatedVisualSource Source
-        //{
-        //    get { return (IAnimatedVisualSource)GetValue(SourceProperty); }
-        //    set { SetValue(SourceProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty SourceProperty =
-        //    DependencyProperty.Register("Source", typeof(IAnimatedVisualSource), typeof(AnimatedIcon), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
-
-        //private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    var animatedIcon = d as AnimatedIcon;
-        //    animatedIcon.UpdateSource(e);
-        //}
 
         // Attached property setter for IsIconController.
         public static void SetIsIconController(UIElement element, bool value)
@@ -258,18 +229,13 @@ namespace AnimatedIconPrototype
             return null;
         }
 
-        private void UpdateStates()
+        void UpdateSize()
         {
-            AnimatedVisualPlayer player = (AnimatedVisualPlayer)Children[0];
+            var fontSize = new Size(FontSize, FontSize);
+            var size = MeasureOverride(fontSize);
+            ArrangeOverride(size);
 
-            if (this.IsAnimating)
-            {
-                _ = player.PlayAsync(0, 1, IsLooping);
-            }
-            else
-            {
-                player.Stop();
-            }
+            this.Width = FontSize;
         }
 
         // Stops the Lottie animation.
@@ -302,25 +268,12 @@ namespace AnimatedIconPrototype
             }
         }
 
-        //private void UpdateSource(DependencyPropertyChangedEventArgs e)
-        //{
-        //    AnimatedVisualPlayer player = (AnimatedVisualPlayer)Children[0];
-        //    player.Source = e.NewValue as IAnimatedVisualSource;
-        //}
-
-        //private void UpdateProgressPosition(double progressPosition)
-        //{
-        //    AnimatedVisualPlayer player = (AnimatedVisualPlayer)Children[0];
-        //    player.SetProgress(progressPosition);
-        //}
-
         // Shows the current Text value as text.
         void ShowText()
         {
             // Make the TextBlock visible.
-            FontIcon fontText = new FontIcon();
-            fontText.Glyph = Glyph;
-            Children.Add(fontText);
+            FontIcon iconText = (FontIcon)Children[0];
+            iconText.Opacity = 1;
 
             // Hide the lottie animation.
             if (_rootVisual != null)
@@ -340,7 +293,8 @@ namespace AnimatedIconPrototype
             else
             {
                 // Hide the static text block.
-                //Children.Clear();
+                FontIcon iconText = (FontIcon)Children[0];
+                iconText.Opacity = 0;
 
                 // Make the Lottie animation visible.
                 _rootVisual.IsVisible = true;

@@ -27,12 +27,11 @@
 
         <!-- AnimatedIcon Samples -->
         <StackPanel Grid.Column="1" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
-            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
-                <local:AnimatedIcon Width="36"
-                x:Name="QA_AirplaneMode"
-                IsAnimating="{Binding Mode=OneWay,ElementName=isAnimatingCheckBox, Path=IsChecked}"
-                IsLooping="{Binding Mode=OneWay,ElementName=isLoopingCheckBox, Path=IsChecked}"
-                Glyph="&#xE709;">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true" >
+                <local:AnimatedIcon
+                    x:Name="QA_AirplaneMode"
+                    Glyph="&#xE709;"
+                    FontSize="80">
                 </local:AnimatedIcon>
             </ToggleButton>
 
@@ -47,7 +46,17 @@
                     </local:AnimatedIcon.Source>
                 </local:AnimatedIcon>
             </ToggleButton>-->
-            <FontIcon Glyph="&#xE709;"/>
+            <!--<ToggleButton Background="White">
+                <FontIcon Glyph="&#xE709;" FontSize="20" Width="80"/>
+            </ToggleButton>
+
+            <local:AnimatedIcon
+                Width="80"
+                x:Name="QA_AirplaneMode2"
+                IsIconController="true"
+                Glyph="&#xE709;">
+            </local:AnimatedIcon>-->
+
         </StackPanel>
 
         <StackPanel Grid.Column="2" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
