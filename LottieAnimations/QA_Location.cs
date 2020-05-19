@@ -48,7 +48,7 @@ using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 
-namespace WindowsInternal.ComposableShell.Experiences
+namespace AnimatedIconPrototype
 {
     // Name:        QA_Location
     // Frame rate:  60 fps

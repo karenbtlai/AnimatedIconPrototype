@@ -13,8 +13,8 @@
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="70" />
             <ColumnDefinition Width="180" />
             <ColumnDefinition Width="180" />
         </Grid.ColumnDefinitions>
@@ -26,51 +26,172 @@
         </StackPanel>
 
         <!-- AnimatedIcon Samples -->
-        <StackPanel Grid.Column="1" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+        <!--<StackPanel Grid.Column="1" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
             <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
                 <local:AnimatedIcon
                     x:Name="QA_AirplaneMode"
                     Glyph="&#xE709;"
-                    FontSize="40"
-                    Foreground="{ThemeResource SystemControlHighlightAccentBrush}">
+                    FontSize="40">
                 </local:AnimatedIcon>
             </ToggleButton>
-
-            <!--<ToggleButton Background="White">
-                <local:AnimatedIcon Width="36"
-                x:Name="QA_AirplaneMode"
-                IsAnimating="{Binding Mode=OneWay,ElementName=isAnimatingCheckBox, Path=IsChecked}"
-                IsLooping="{Binding Mode=OneWay,ElementName=isLoopingCheckBox, Path=IsChecked}"
-                ProgressPosition="{Binding Mode=OneWay,ElementName=progressSlider, Path=Value}">
-                    <local:AnimatedIcon.Source>
-                        <local:QA_AirplaneMode/>
-                    </local:AnimatedIcon.Source>
-                </local:AnimatedIcon>
-            </ToggleButton>-->
             <ToggleButton Background="White">
-                <FontIcon Glyph="&#xE709;" FontSize="40"/>
+                <FontIcon Glyph="&#xE709;" 
+                          FontSize="40"/>
             </ToggleButton>
-
-            <local:AnimatedIcon
-                Width="80"
-                x:Name="QA_AirplaneMode2"
-                IsIconController="true"
-                Glyph="&#xE709;">
-            </local:AnimatedIcon>
-
         </StackPanel>
 
         <StackPanel Grid.Column="2" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
-            <!--<local:AnimatedIcon Width="200"   
-                x:Name="OnPointerOverAnimatedIcon"
-                IsAnimating="False"
-                IsLooping="False"
-                PointerEntered="OnPointerOverAnimatedIcon_PointerEntered"
-                PointerExited="OnPointerOverAnimatedIcon_PointerExited">
-                <local:AnimatedIcon.Source>
-                    <local:LegoLoader/>
-                </local:AnimatedIcon.Source>
-            </local:AnimatedIcon>-->
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_Bluetooth"
+                    Glyph="&#xE702;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE702;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>-->
+
+        <!--<StackPanel Grid.Column="4" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_Cellular"
+                    Glyph="&#xE706;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE706;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>-->
+
+        <StackPanel Grid.Column="5" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_ComposeMode"
+                    Glyph="&#xEFA2;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xEFA5;" 
+                          FontSize="40"/>
+            </ToggleButton>
         </StackPanel>
+
+        <!--<StackPanel Grid.Column="6" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_DoNotDisturb"
+                    Glyph="&#xE708;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE708;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>
+
+        <StackPanel Grid.Column="7" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_EaseOfAccess"
+                    Glyph="&#xE776;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE776;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>
+
+        <StackPanel Grid.Column="8" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_InputLanguage"
+                    Glyph="&#xE8C1;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE8C1;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>
+
+        <StackPanel Grid.Column="9" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_Location"
+                    Glyph="&#xE707;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE707;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>
+
+        <StackPanel Grid.Column="10" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_Project"
+                    Glyph="&#xEBC6;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xEBC6;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>-->
+
+        <!--<StackPanel Grid.Column="11" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_RotationLock"
+                    Glyph="&#xE755;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE755;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>-->
+
+        <!--<StackPanel Grid.Column="12" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_Volume"
+                    Glyph="&#xE15D;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE15D;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>-->
+
+        <!--<StackPanel Grid.Column="14" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+            <ToggleButton Background="White" local:AnimatedIcon.IsIconController="true">
+                <local:AnimatedIcon
+                    x:Name="QA_Wifi"
+                    Glyph="&#xE701;"
+                    FontSize="40">
+                </local:AnimatedIcon>
+            </ToggleButton>
+            <ToggleButton Background="White">
+                <FontIcon Glyph="&#xE701;" 
+                          FontSize="40"/>
+            </ToggleButton>
+        </StackPanel>-->
     </Grid>
 </Page>

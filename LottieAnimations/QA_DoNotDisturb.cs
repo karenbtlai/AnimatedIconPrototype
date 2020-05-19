@@ -48,7 +48,7 @@ using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 
-namespace WindowsInternal.ComposableShell.Experiences
+namespace AnimatedIconPrototype
 {
     // Name:        Asset - AnimIcon - Action Center - New - Do Not Disturb
     // Frame rate:  60 fps

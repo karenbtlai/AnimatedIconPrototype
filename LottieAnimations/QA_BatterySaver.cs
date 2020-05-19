@@ -50,7 +50,7 @@ using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 
-namespace WindowsInternal.ComposableShell.Experiences
+namespace AnimatedIconPrototype
 {
     // Name:        QA_BatterySaver
     // Frame rate:  60 fps

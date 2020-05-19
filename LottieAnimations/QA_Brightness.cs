@@ -48,7 +48,7 @@ using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 
-namespace WindowsInternal.ComposableShell.Experiences
+namespace AnimatedIconPrototype
 {
     // Name:        QA_Brightness
     // Frame rate:  30 fps

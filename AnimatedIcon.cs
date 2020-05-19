@@ -53,8 +53,7 @@ namespace AnimatedIconPrototype
         public AnimatedIcon()
         {
             // Add FontIcon to Panel for for fallback
-            FontIcon fontText = new FontIcon();
-            fontText.Glyph = Glyph;
+            TextBlock fontText = new TextBlock();
             Children.Add(fontText);
 
             Loaded += AnimatedIcon_Loaded;
@@ -97,27 +96,33 @@ namespace AnimatedIconPrototype
             FrameworkElement child = (FrameworkElement)Children[0];
             child.Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
 
-            var lottieNaturalSize = _lottieInstance.Size;
+            if (_lottieInstance != null)
+            {
+                var lottieNaturalSize = _lottieInstance.Size;
 
-            // Calculate the scale that needs to be applied in order to make the
-            // Lottie animation fit inside the given size.
-            var scale = new Size(finalSize.Width / lottieNaturalSize.X, finalSize.Height / lottieNaturalSize.Y);
+                // Calculate the scale that needs to be applied in order to make the
+                // Lottie animation fit inside the given size.
+                var scale = new Size(finalSize.Width / lottieNaturalSize.X, finalSize.Height / lottieNaturalSize.Y);
 
-            // Adjust the scale to make it uniform (same scaling for width and height).
-            var smallestScaleDimension = Math.Min(scale.Width, scale.Height);
+                // Adjust the scale to make it uniform (same scaling for width and height).
+                var smallestScaleDimension = Math.Min(scale.Width, scale.Height);
 
-            // Calculate the size of the Lottie animation after scaling.
-            var scaledLottieSize = new Size(lottieNaturalSize.X * smallestScaleDimension, lottieNaturalSize.Y * smallestScaleDimension);
+                // Calculate the size of the Lottie animation after scaling.
+                var scaledLottieSize = new Size(lottieNaturalSize.X * smallestScaleDimension, lottieNaturalSize.Y * smallestScaleDimension);
 
-            // Scale the Lottie to fit.
-            _rootVisual.Scale = new Vector3((float)smallestScaleDimension);
+                // Scale the Lottie to fit.
+                _rootVisual.Scale = new Vector3((float)smallestScaleDimension);
 
-            // Center the animation within the available space.
-            _rootVisual.Offset = new Vector3(
-                                        (float)((finalSize.Width - scaledLottieSize.Width) / 2),
-                                        (float)((finalSize.Height - scaledLottieSize.Height) / 2),
-                                        0);
-            return scaledLottieSize;
+                // Center the animation within the available space.
+                _rootVisual.Offset = new Vector3(
+                                            (float)((finalSize.Width - scaledLottieSize.Width) / 2),
+                                            (float)((finalSize.Height - scaledLottieSize.Height) / 2),
+                                            0);
+                return scaledLottieSize;
+            }
+
+            return finalSize;
+            
         }
 
         public string Glyph
@@ -183,7 +188,7 @@ namespace AnimatedIconPrototype
         }
 
         public static readonly DependencyProperty ForegroundProperty =
-            DependencyProperty.Register("Foreground", typeof(Brush), typeof(AnimatedIcon), new PropertyMetadata(null, new PropertyChangedCallback(OnForegroundChanged)));
+            DependencyProperty.Register("Foreground", typeof(Brush), typeof(AnimatedIcon), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x00)), new PropertyChangedCallback(OnForegroundChanged)));
 
         // Handles ForegroundProperty change notifications.
         // Sets the Foreground of the Lottie (if one exists) to the color
@@ -349,7 +354,10 @@ namespace AnimatedIconPrototype
         void ShowText()
         {
             // Make the TextBlock visible.
-            FontIcon iconText = (FontIcon)Children[0];
+            TextBlock iconText = (TextBlock)Children[0]; 
+            iconText.FontFamily = new FontFamily("Segoe MDL2 Assets");
+            iconText.FontSize = FontSize;
+            iconText.Text = Glyph;
             iconText.Opacity = 1;
 
             // Hide the lottie animation.
@@ -363,14 +371,14 @@ namespace AnimatedIconPrototype
 
         void ShowLottie()
         {
-            if (_lottieSource is null)
+            if (_lottieSource is null || _lottieInstance is null)
             {
                 ShowText();
             }
             else
             {
                 // Hide the static text block.
-                FontIcon iconText = (FontIcon)Children[0];
+                TextBlock iconText = (TextBlock)Children[0];
                 iconText.Opacity = 0;
 
                 // Make the Lottie animation visible.
@@ -405,9 +413,12 @@ namespace AnimatedIconPrototype
                     // Create an instance of the Lottie animation.
                     _lottieInstance = _lottieSource.TryCreateAnimatedVisual(_rootVisual.Compositor, out var _);
 
-                    var rootVisualChildren = _rootVisual.Children;
-                    rootVisualChildren.RemoveAll();
-                    rootVisualChildren.InsertAtTop(_lottieInstance.RootVisual);
+                    if (_lottieInstance != null)
+                    {
+                        var rootVisualChildren = _rootVisual.Children;
+                        rootVisualChildren.RemoveAll();
+                        rootVisualChildren.InsertAtTop(_lottieInstance.RootVisual);
+                    }
                 }
             }
         }
@@ -417,18 +428,18 @@ namespace AnimatedIconPrototype
             switch (icon)
             {
                 case QaIcon.AirplaneMode: return new AnimatedIconPrototype.QA_AirplaneMode();
-                //case QaIcon.Bluetooth: return new WindowsInternal.ComposableShell.Experiences.QA_BlueTooth();
-                //case QaIcon.Brightness: return new WindowsInternal.ComposableShell.Experiences.QA_Brightness();
-                //case QaIcon.Cellular: return new WindowsInternal.ComposableShell.Experiences.QA_Cellular();
-                //case QaIcon.ComposeMode: return new WindowsInternal.ComposableShell.Experiences.QA_ComposeMode();
-                //case QaIcon.DoNotDisturb: return new WindowsInternal.ComposableShell.Experiences.QA_DoNotDisturb();
-                //case QaIcon.EaseOfAccess: return new WindowsInternal.ComposableShell.Experiences.QA_EaseOfAccess();
-                //case QaIcon.InputLanguage: return new WindowsInternal.ComposableShell.Experiences.QA_InputLanguage();
-                //case QaIcon.Location: return new WindowsInternal.ComposableShell.Experiences.QA_Location();
-                //case QaIcon.Project: return new WindowsInternal.ComposableShell.Experiences.QA_Project();
-                //case QaIcon.RotationLock: return new WindowsInternal.ComposableShell.Experiences.QA_RotationLock();
-                //case QaIcon.Volume: return new WindowsInternal.ComposableShell.Experiences.QA_Volume();
-                //case QaIcon.Wifi: return new WindowsInternal.ComposableShell.Experiences.QA_Wifi();
+                case QaIcon.Bluetooth: return new AnimatedIconPrototype.QA_BlueTooth();
+                case QaIcon.Brightness: return new AnimatedIconPrototype.QA_Brightness(); // Not working right now?
+                case QaIcon.Cellular: return new AnimatedIconPrototype.QA_Cellular();
+                case QaIcon.ComposeMode: return new AnimatedIconPrototype.QA_ComposeMode();
+                case QaIcon.DoNotDisturb: return new AnimatedIconPrototype.QA_DoNotDisturb();
+                case QaIcon.EaseOfAccess: return new AnimatedIconPrototype.QA_EaseOfAccess();
+                case QaIcon.InputLanguage: return new AnimatedIconPrototype.QA_InputLanguage();
+                case QaIcon.Location: return new AnimatedIconPrototype.QA_Location();
+                case QaIcon.Project: return new AnimatedIconPrototype.QA_Project();
+                case QaIcon.RotationLock: return new AnimatedIconPrototype.QA_RotationLock();
+                case QaIcon.Volume: return new AnimatedIconPrototype.QA_Volume();
+                case QaIcon.Wifi: return new AnimatedIconPrototype.QA_Wifi();
             }
 
             return null;

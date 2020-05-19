@@ -43,12 +43,13 @@
 // | CompositionVisualSurface |     - |
 // ------------------------------------
 using Microsoft.Graphics.Canvas.Geometry;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 
-namespace WindowsInternal.ComposableShell.Experiences
+namespace AnimatedIconPrototype
 {
     // Name:        QA_ComposeMode
     // Frame rate:  60 fps
