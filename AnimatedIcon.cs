@@ -88,7 +88,7 @@ namespace AnimatedIconPrototype
             child.Measure(availableSize);
 
             var fontSize = FontSize;
-           return new Size(fontSize, fontSize);
+            return new Size(fontSize, fontSize);
         }
 
         protected override Size ArrangeOverride(Size finalSize)
@@ -313,11 +313,18 @@ namespace AnimatedIconPrototype
 
         void UpdateSize()
         {
+            // Adjust Panel children sizing based on FontSize.
             var fontSize = new Size(FontSize, FontSize);
             var size = MeasureOverride(fontSize);
             ArrangeOverride(size);
 
+            // Adjust Panel Width.
             this.Width = FontSize;
+
+            // Adjust Textblock icon font size
+            TextBlock iconText = (TextBlock)Children[0];
+            iconText.FontSize = FontSize;
+            
         }
 
         // Stops the Lottie animation.
@@ -353,11 +360,12 @@ namespace AnimatedIconPrototype
         // Shows the current Text value as text.
         void ShowText()
         {
-            // Make the TextBlock visible.
+            //Apply Text from GlyphProperty
             TextBlock iconText = (TextBlock)Children[0]; 
             iconText.FontFamily = new FontFamily("Segoe MDL2 Assets");
-            iconText.FontSize = FontSize;
             iconText.Text = Glyph;
+
+            // Make the TextBlock visible.
             iconText.Opacity = 1;
 
             // Hide the lottie animation.
@@ -429,7 +437,7 @@ namespace AnimatedIconPrototype
             {
                 case QaIcon.AirplaneMode: return new AnimatedIconPrototype.QA_AirplaneMode();
                 case QaIcon.Bluetooth: return new AnimatedIconPrototype.QA_BlueTooth();
-                case QaIcon.Brightness: return new AnimatedIconPrototype.QA_Brightness(); // Not working right now?
+                case QaIcon.Brightness: return new AnimatedIconPrototype.QA_Brightness();
                 case QaIcon.Cellular: return new AnimatedIconPrototype.QA_Cellular();
                 case QaIcon.ComposeMode: return new AnimatedIconPrototype.QA_ComposeMode();
                 case QaIcon.DoNotDisturb: return new AnimatedIconPrototype.QA_DoNotDisturb();
