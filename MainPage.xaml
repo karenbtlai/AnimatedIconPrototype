@@ -25,12 +25,13 @@
             <ColumnDefinition Width="70" />
             <ColumnDefinition Width="70" />
             <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Spacing="10">
-            <CheckBox x:Name="isAnimatingCheckBox" IsChecked="True" Content="IsAnimating" Margin="50, 0, 0, 0"/>
+            <!--<CheckBox x:Name="isAnimatingCheckBox" IsChecked="True" Content="IsAnimating" Margin="50, 0, 0, 0"/>
             <CheckBox x:Name="isLoopingCheckBox" Content="IsLooping" IsChecked="True" Margin="50, 0, 0, 0"/>
-            <Slider Header="Value: " x:Name="progressSlider" Minimum="0" Maximum="1" StepFrequency="0.01" Width="100" IsThumbToolTipEnabled="False"/>
+            <Slider Header="Value: " x:Name="progressSlider" Minimum="0" Maximum="1" StepFrequency="0.01" Width="100" IsThumbToolTipEnabled="False"/>-->
         </StackPanel>
 
         <!-- AnimatedIcon Samples -->
@@ -46,6 +47,10 @@
                 <FontIcon Glyph="&#xE709;" 
                           FontSize="40"/>
             </ToggleButton>
+            <local:AnimatedIcon
+                    Glyph="&#xE709;"
+                    FontSize="40">
+            </local:AnimatedIcon>
         </StackPanel>
 
         <StackPanel Grid.Column="2" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">

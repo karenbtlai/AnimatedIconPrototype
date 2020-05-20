@@ -79,6 +79,11 @@ namespace AnimatedIconPrototype
 
             //    SyncProgressToRangeBaseController();
             //}
+            else
+            {
+                this.PointerEntered += AnimatedIcon_PointerEntered;
+                this.PointerExited += AnimatedIcon_PointerExited;
+            }
         }
 
         protected override Size MeasureOverride(Size availableSize)
@@ -273,6 +278,18 @@ namespace AnimatedIconPrototype
         // Handles a press on a controller that is a Button.
         void Button_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
             => FindAnimatedIcon((ButtonBase)sender)?.PlayOnce();
+
+        private void AnimatedIcon_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            ((AnimatedIcon)sender)?.PlayOnce();
+
+        }
+        private void AnimatedIcon_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            ((AnimatedIcon)sender)?.Stop();
+        }
+
+        
 
         // Searches the visual tree from the given root and returns the first
         // AnimatedIcon in the tree, or null if none found.
