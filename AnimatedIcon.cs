@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI;
+using Windows.UI.Xaml.Input;
 
 interface ILottieVisual : IDisposable
 {
@@ -69,9 +70,10 @@ namespace AnimatedIconPrototype
             // This is our opportunity to hook up to the controller's events:
             if (_controller is ButtonBase button)
             {
-                button.PointerEntered += Button_PointerEntered;
-                button.PointerExited += Button_PointerExited;
-                button.PointerPressed += Button_PointerPressed;
+                //button.PointerEntered += Button_PointerEntered;
+                //button.PointerExited += Button_PointerExited;
+                //button.PointerPressed += Button_PointerPressed;
+                button.AddHandler(PointerPressedEvent, new PointerEventHandler(Button_PointerPressed), true);
             }
             //else if (_controller is RangeBase rangeBase)
             //{
@@ -81,6 +83,7 @@ namespace AnimatedIconPrototype
             //}
             else
             {
+                // If no controller is present, add events to AnimatedIcon itself.
                 this.PointerEntered += AnimatedIcon_PointerEntered;
                 this.PointerExited += AnimatedIcon_PointerExited;
             }
@@ -277,7 +280,21 @@ namespace AnimatedIconPrototype
 
         // Handles a press on a controller that is a Button.
         void Button_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
-            => FindAnimatedIcon((ButtonBase)sender)?.PlayOnce();
+        {
+            // Check for input device
+            if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
+            {
+                var properties = e.GetCurrentPoint(this).Properties;
+                if (properties.IsLeftButtonPressed)
+                {
+                    FindAnimatedIcon((ButtonBase)sender)?.PlayOnce();
+                }
+                else if (properties.IsRightButtonPressed)
+                {
+                    // Right button pressed
+                }
+            }
+        }
 
         private void AnimatedIcon_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
