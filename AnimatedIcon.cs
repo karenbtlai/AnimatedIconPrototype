@@ -154,7 +154,7 @@ namespace AnimatedIconPrototype
             // one of the well-known animated icons.
             var lottieGlyph = IconFromGlyph((string)e.NewValue);
 
-            //animatedIcon._isMuteIcon = lottieIconId == QaIcon.Mute;
+            animatedIcon._isMuteIcon = lottieGlyph == QaIcon.Mute;
 
             if (lottieGlyph == QaIcon.None)
             {
@@ -164,12 +164,12 @@ namespace AnimatedIconPrototype
             }
             else
             {
-                //if (animatedIcon._isMuteIcon)
-                //{
-                //    // Special case - use the Volume icon for mute. It will
-                //    // be prevented from animating.
-                //    lottieGlyph = QaIcon.Volume;
-                //}
+                if (animatedIcon._isMuteIcon)
+                {
+                    // Special case - use the Volume icon for mute. It will
+                    // be prevented from animating.
+                    lottieGlyph = QaIcon.Volume;
+                }
 
                 animatedIcon.UpdateLottieSourceAndInstance(lottieGlyph);
 
@@ -183,17 +183,17 @@ namespace AnimatedIconPrototype
         {
             if (_controller is RangeBase rangeBase)
             {
-                //if (_isMuteIcon)
-                //{
-                //    // Special-case the mute icon - show frame 0 of the Volume animation.
-                //    SetProgress(0);
-                //}
-                //else
-                //{
+                if (_isMuteIcon)
+                {
+                    // Special-case the mute icon - show frame 0 of the Volume animation.
+                    SetProgress(0);
+                }
+                else
+                {
                     // Set the progress to the current value of the RangeBase.
                     var range = rangeBase.Maximum - rangeBase.Minimum;
                     SetProgress(rangeBase.Value / range);
-                //}
+                }
             }
         }
 
