@@ -44,6 +44,10 @@ namespace AnimatedIconPrototype
         // A visual used for scaling and offsetting the animated icon.
         ContainerVisual _rootVisual;
 
+        // True iff the icon is displaying "Mute". This is a special case
+        // as it is displayed as frame 0 of the Volume Lottie.
+        bool _isMuteIcon;
+
         // The Foreground brush, iff it's a SolidColorBrush.
         SolidColorBrush _foregroundSolidColorBrush;
 
@@ -70,17 +74,16 @@ namespace AnimatedIconPrototype
             // This is our opportunity to hook up to the controller's events:
             if (_controller is ButtonBase button)
             {
-                //button.PointerEntered += Button_PointerEntered;
-                //button.PointerExited += Button_PointerExited;
-                //button.PointerPressed += Button_PointerPressed;
+                button.PointerEntered += Button_PointerEntered;
+                button.PointerExited += Button_PointerExited;
                 button.AddHandler(PointerPressedEvent, new PointerEventHandler(Button_PointerPressed), true);
             }
-            //else if (_controller is RangeBase rangeBase)
-            //{
-            //    rangeBase.ValueChanged += RangeBase_ValueChanged;
+            else if (_controller is RangeBase rangeBase)
+            {
+                rangeBase.ValueChanged += RangeBase_ValueChanged;
 
-            //    SyncProgressToRangeBaseController();
-            //}
+                SyncProgressToRangeBaseController();
+            }
             else
             {
                 // If no controller is present, add events to AnimatedIcon itself.
@@ -174,6 +177,26 @@ namespace AnimatedIconPrototype
             }
         }
 
+        // Sets the progress of the Lottie animation to the value of
+        // the RangeBase controller, if there is one.
+        void SyncProgressToRangeBaseController()
+        {
+            if (_controller is RangeBase rangeBase)
+            {
+                //if (_isMuteIcon)
+                //{
+                //    // Special-case the mute icon - show frame 0 of the Volume animation.
+                //    SetProgress(0);
+                //}
+                //else
+                //{
+                    // Set the progress to the current value of the RangeBase.
+                    var range = rangeBase.Maximum - rangeBase.Minimum;
+                    SetProgress(rangeBase.Value / range);
+                //}
+            }
+        }
+
         public double FontSize
         {
             get { return (double)GetValue(FontSizeProperty); }
@@ -243,13 +266,13 @@ namespace AnimatedIconPrototype
             => UpdateLottieForegroundColor();
 
         // Sets the color of the Lottie "Foreground" property to the color of
-        // the Foreground brush, or to transparent if the brush is not a
+        // the Foreground brush, or to default black if the brush is not a
         // SolidColorBrush.
         void UpdateLottieForegroundColor()
         {
             if (_lottieSource != null)
             {
-                var color = _foregroundSolidColorBrush is null ? Colors.Transparent : _foregroundSolidColorBrush.Color;
+                var color = _foregroundSolidColorBrush is null ? Color.FromArgb(0xFF, 0x00, 0x00, 0x00) : _foregroundSolidColorBrush.Color;
                 var themeProperties = _lottieSource.GetThemeProperties(Window.Current.Compositor);
                 themeProperties.InsertVector4("Foreground", ColorAsVector4(color));
             }
@@ -281,18 +304,18 @@ namespace AnimatedIconPrototype
         // Handles a press on a controller that is a Button.
         void Button_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            // Check for input device
-            if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
+            FindAnimatedIcon((ButtonBase)sender)?.PlayOnce();
+        }
+
+        // Handles ValueChanged on a controller that is a RangeBase (typically a Slider).
+        static void RangeBase_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            var rangeBase = (RangeBase)sender;
+            var range = rangeBase.Maximum - rangeBase.Minimum;
+            var animatedIcon = FindAnimatedIcon(rangeBase);
+            if (animatedIcon != null && !animatedIcon._isMuteIcon)
             {
-                var properties = e.GetCurrentPoint(this).Properties;
-                if (properties.IsLeftButtonPressed)
-                {
-                    FindAnimatedIcon((ButtonBase)sender)?.PlayOnce();
-                }
-                else if (properties.IsRightButtonPressed)
-                {
-                    // Right button pressed
-                }
+                animatedIcon.AnimateToProgress(e.OldValue / range, e.NewValue / range);
             }
         }
 
@@ -361,6 +384,52 @@ namespace AnimatedIconPrototype
             
         }
 
+        // Sets the current Progress position of the Lottie animation.
+        void SetProgress(double progress)
+        {
+            if (_lottieInstance != null)
+            {
+                var propertySet = _lottieInstance.RootVisual.Properties;
+                propertySet.InsertScalar("Progress", (float)Math.Min(Math.Max(progress, 0), 1));
+            }
+        }
+
+        // Animates from oldProgress to newProgress.
+        void AnimateToProgress(double oldProgress, double newProgress)
+        {
+            if (_lottieInstance != null)
+            {
+                var propertySet = _lottieInstance.RootVisual.Properties;
+
+                var diff = Math.Abs(oldProgress - newProgress);
+                if (diff < 0.1)
+                {
+                    // It's a small change. Jump straight to the new position.
+                    // This ensures that the icon feels responsive when the slider
+                    // is dragged.
+                    propertySet.InsertScalar("Progress", (float)Math.Min(Math.Max(newProgress, 0), 1));
+                }
+                else
+                {
+                    // It's a large change. This is usually caused by a click on the
+                    // slider. Animate it to the new position.
+                    // Get the current position. This might be out of date if the value is currently
+                    // animating, but it's good enough.
+                    var compositor = propertySet.Compositor;
+                    using (var kfa = compositor.CreateScalarKeyFrameAnimation())
+                    using (var easing = compositor.CreateLinearEasingFunction())
+                    {
+                        kfa.Duration = _lottieInstance.Duration * diff;
+                        kfa.IterationBehavior = AnimationIterationBehavior.Count;
+                        kfa.IterationCount = 1;
+                        kfa.StopBehavior = AnimationStopBehavior.LeaveCurrentValue;
+                        kfa.InsertKeyFrame(1, (float)newProgress, easing);
+                        propertySet.StartAnimation("Progress", kfa);
+                    }
+                }
+            }
+        }
+
         // Stops the Lottie animation.
         void Stop()
         {
@@ -427,10 +496,10 @@ namespace AnimatedIconPrototype
                 _rootVisual.IsVisible = true;
 
                 // Synchronize the foreground color with the current Foreground property value.
-                //UpdateLottieForegroundColor();
+                UpdateLottieForegroundColor();
 
                 // If there's a RangeBase controller sync Progress to its current value.
-                //SyncProgressToRangeBaseController();
+                SyncProgressToRangeBaseController();
 
                 InvalidateMeasure();
             }
@@ -482,6 +551,7 @@ namespace AnimatedIconPrototype
                 case QaIcon.RotationLock: return new AnimatedIconPrototype.QA_RotationLock();
                 case QaIcon.Volume: return new AnimatedIconPrototype.QA_Volume();
                 case QaIcon.Wifi: return new AnimatedIconPrototype.QA_Wifi();
+                case QaIcon.FingerHello: return new AnimatedIconPrototype.FingerHello();
             }
 
             return null;
@@ -510,6 +580,7 @@ namespace AnimatedIconPrototype
                     case QaIcon.RotationLock:
                     case QaIcon.Volume:
                     case QaIcon.Wifi:
+                    case QaIcon.FingerHello:
                         break;
 
                     default:
@@ -547,6 +618,7 @@ namespace AnimatedIconPrototype
             TouchKeyboard = 0xE765,
             Volume = 0xE15D,
             Wifi = 0xE701,
+            FingerHello = 0xE928,
         }
     }
 }
