@@ -55,6 +55,8 @@ namespace AnimatedIconPrototype
         // with the IsIconController=true attached property.
         UIElement _controller;
 
+        bool _toggleIsPressed = true;
+
         public AnimatedIcon()
         {
             // Add FontIcon to Panel for for fallback
@@ -72,7 +74,11 @@ namespace AnimatedIconPrototype
             _controller = FindController();
 
             // This is our opportunity to hook up to the controller's events:
-            if (_controller is ButtonBase button)
+            if (Toggle)
+            {
+                this.AddHandler(PointerPressedEvent, new PointerEventHandler(Button_PointerPressed), true);
+            }
+            else if (_controller is ButtonBase button)
             {
                 button.PointerEntered += Button_PointerEntered;
                 button.PointerExited += Button_PointerExited;
@@ -174,6 +180,26 @@ namespace AnimatedIconPrototype
                 animatedIcon.UpdateLottieSourceAndInstance(lottieGlyph);
 
                 animatedIcon.ShowLottie();
+            }
+        }
+
+        public bool Toggle
+        {
+            get { return (bool)GetValue(ToggleProperty); }
+            set { SetValue(ToggleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Toggle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ToggleProperty =
+            DependencyProperty.Register("Toggle", typeof(bool), typeof(AnimatedIcon), new PropertyMetadata(false, new PropertyChangedCallback(OnToggleChanged)));
+
+        private static void OnToggleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var animatedIcon = (AnimatedIcon)d;
+
+            if (animatedIcon.Toggle)
+            {
+                animatedIcon.UpdateToggleState();
             }
         }
 
@@ -304,7 +330,14 @@ namespace AnimatedIconPrototype
         // Handles a press on a controller that is a Button.
         void Button_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            FindAnimatedIcon((ButtonBase)sender)?.PlayOnce();
+            if (Toggle)
+            {
+                UpdateToggleState();
+            }
+            else
+            {
+                FindAnimatedIcon((ButtonBase)sender)?.PlayOnce();
+            }
         }
 
         // Handles ValueChanged on a controller that is a RangeBase (typically a Slider).
@@ -382,6 +415,21 @@ namespace AnimatedIconPrototype
             TextBlock iconText = (TextBlock)Children[0];
             iconText.FontSize = FontSize;
             
+        }
+
+        void UpdateToggleState()
+        {
+            if (!_toggleIsPressed)
+            {
+                AnimateToProgress(0, 1);
+                _toggleIsPressed = true;
+            }
+            else
+            {
+                AnimateToProgress(1, 0);
+                _toggleIsPressed = false;
+            }
+
         }
 
         // Sets the current Progress position of the Lottie animation.
