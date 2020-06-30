@@ -1431,7 +1431,7 @@ namespace AnimatedIconPrototype
 
             internal static bool IsRuntimeCompatible()
             {
-                return Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 11);
+                return Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7);
             }
         }
     }
