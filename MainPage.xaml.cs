@@ -22,16 +22,6 @@ namespace AnimatedIconPrototype
         {
             this.InitializeComponent();
         }
-
-        //private void OnPointerOverAnimatedIcon_PointerEntered(object sender, PointerRoutedEventArgs e)
-        //{
-        //    OnPointerOverAnimatedIcon.IsAnimating = true;
-        //}
-
-        //private void OnPointerOverAnimatedIcon_PointerExited(object sender, PointerRoutedEventArgs e)
-        //{
-        //    OnPointerOverAnimatedIcon.IsAnimating = false;
-        //}
     }
 
     public class SolidColorBrushToColorConverter : IValueConverter

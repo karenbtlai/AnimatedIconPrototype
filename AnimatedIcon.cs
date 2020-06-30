@@ -552,6 +552,7 @@ namespace AnimatedIconPrototype
                 case QaIcon.Volume: return new AnimatedIconPrototype.QA_Volume();
                 case QaIcon.Wifi: return new AnimatedIconPrototype.QA_Wifi();
                 case QaIcon.FingerHello: return new AnimatedIconPrototype.FingerHello();
+                case QaIcon.Heart: return new AnimatedIconPrototype.Heart();
             }
 
             return null;
@@ -581,6 +582,7 @@ namespace AnimatedIconPrototype
                     case QaIcon.Volume:
                     case QaIcon.Wifi:
                     case QaIcon.FingerHello:
+                    case QaIcon.Heart:
                         break;
 
                     default:
@@ -619,6 +621,7 @@ namespace AnimatedIconPrototype
             Volume = 0xE15D,
             Wifi = 0xE701,
             FingerHello = 0xE928,
+            Heart = 0xEB51,
         }
     }
 }

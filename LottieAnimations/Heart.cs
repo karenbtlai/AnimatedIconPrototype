@@ -9,10 +9,10 @@
 //           LottieGen -Interface ILottieVisual -Language CSharp -InputFile heart.json
 //       
 //       Input file:
-//           heart.json (18692 bytes created 15:20-07:00 Jun 30 2020)
+//           heart.json (15008 bytes created 15:51-07:00 Jun 30 2020)
 //       
 //       Invoked on:
-//           KAREN @ 15:22-07:00 Jun 30 2020
+//           KAREN @ 15:51-07:00 Jun 30 2020
 //       
 //       LottieGen source:
 //           http://aka.ms/Lottie
@@ -21,44 +21,43 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-// __________________________________________________________
-// |       Object stats       | UAP v8 count | UAP v7 count |
-// |__________________________|______________|______________|
-// | All CompositionObjects   |          162 |          126 |
-// |--------------------------+--------------+--------------|
-// | Animators                |           44 |           42 |
-// | Animated brushes         |            2 |            2 |
-// | Animated gradient stops  |            - |            - |
-// | ExpressionAnimations     |            2 |            1 |
-// | PathKeyFrameAnimations   |            - |            - |
-// |--------------------------+--------------+--------------|
-// | ContainerVisuals         |            3 |            1 |
-// | ShapeVisuals             |            3 |            2 |
-// |--------------------------+--------------+--------------|
-// | ContainerShapes          |            1 |            - |
-// | CompositionSpriteShapes  |           10 |            9 |
-// |--------------------------+--------------+--------------|
-// | Brushes                  |            8 |            3 |
-// | Gradient stops           |            - |            - |
-// | CompositionVisualSurface |            2 |            - |
-// ----------------------------------------------------------
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
+// ____________________________________
+// |       Object stats       | Count |
+// |__________________________|_______|
+// | All CompositionObjects   |   230 |
+// |--------------------------+-------|
+// | Animators                |    70 |
+// | Animated brushes         |    10 |
+// | Animated gradient stops  |     - |
+// | ExpressionAnimations     |     1 |
+// | PathKeyFrameAnimations   |     - |
+// |--------------------------+-------|
+// | ContainerVisuals         |     1 |
+// | ShapeVisuals             |     1 |
+// |--------------------------+-------|
+// | ContainerShapes          |    10 |
+// | CompositionSpriteShapes  |    10 |
+// |--------------------------+-------|
+// | Brushes                  |    10 |
+// | Gradient stops           |     - |
+// | CompositionVisualSurface |     - |
+// ------------------------------------
 using Microsoft.Graphics.Canvas.Geometry;
 using System;
 using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 
-namespace AnimatedVisuals
+namespace AnimatedIconPrototype
 {
-    // Frame rate:  29.9700012207031 fps
-    // Frame count: 150.000006109625
-    // Duration:    5005.0 mS
+    // Name:        heart-pop-animation
+    // Frame rate:  60 fps
+    // Frame count: 60
+    // Duration:    1000.0 mS
     sealed class Heart : ILottieVisualSource
     {
-        // Animation duration: 5.005 seconds.
-        internal const long c_durationTicks = 50050050;
+        // Animation duration: 1.000 seconds.
+        internal const long c_durationTicks = 10000000;
 
         // Theme property: Foreground.
         internal static readonly Color c_themeForeground = Color.FromArgb(0xFF, 0x00, 0x00, 0x00);
@@ -101,18 +100,10 @@ namespace AnimatedVisuals
         {
             diagnostics = null;
 
-            if (AnimatedVisual_UAPv8.IsRuntimeCompatible())
+            if (AnimatedVisual.IsRuntimeCompatible())
             {
                 return
-                    new AnimatedVisual_UAPv8(
-                        compositor
-                        );
-            }
-
-            if (AnimatedVisual_UAPv7.IsRuntimeCompatible())
-            {
-                return
-                    new AnimatedVisual_UAPv7(
+                    new AnimatedVisual(
                         compositor
                         );
             }
@@ -120,22 +111,18 @@ namespace AnimatedVisuals
             return null;
         }
 
-        sealed class AnimatedVisual_UAPv8 : ILottieVisual
+        sealed class AnimatedVisual : ILottieVisual
         {
-            const long c_durationTicks = 50050050;
+            const long c_durationTicks = 10000000;
             readonly Compositor _c;
             readonly ExpressionAnimation _reusableExpressionAnimation;
-            CompositionColorBrush _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-            CompositionPathGeometry _pathGeometry_0;
+            CompositionEllipseGeometry _ellipse_5p077;
             ContainerVisual _root;
             CubicBezierEasingFunction _cubicBezierEasingFunction_0;
             CubicBezierEasingFunction _cubicBezierEasingFunction_1;
-            CubicBezierEasingFunction _cubicBezierEasingFunction_2;
             ExpressionAnimation _rootProgress;
             StepEasingFunction _holdThenStepEasingFunction;
             StepEasingFunction _stepThenHoldEasingFunction;
-            Vector2KeyFrameAnimation _scaleVector2Animation_0;
-            Vector2KeyFrameAnimation _scaleVector2Animation_3;
 
             static void StartProgressBoundAnimation(
                 CompositionObject target,
@@ -147,19 +134,6 @@ namespace AnimatedVisuals
                 var controller = target.TryGetAnimationController(animatedPropertyName);
                 controller.Pause();
                 controller.StartAnimation("Progress", controllerProgressExpression);
-            }
-
-            void BindProperty(
-                CompositionObject target,
-                string animatedPropertyName,
-                string expression,
-                string referenceParameterName,
-                CompositionObject referencedObject)
-            {
-                _reusableExpressionAnimation.ClearAllParameters();
-                _reusableExpressionAnimation.Expression = expression;
-                _reusableExpressionAnimation.SetReferenceParameter(referenceParameterName, referencedObject);
-                target.StartAnimation(animatedPropertyName, _reusableExpressionAnimation);
             }
 
             ColorKeyFrameAnimation CreateColorKeyFrameAnimation(float initialProgress, Color initialValue, CompositionEasingFunction initialEasingFunction)
@@ -184,13 +158,6 @@ namespace AnimatedVisuals
                 var result = _c.CreateVector2KeyFrameAnimation();
                 result.Duration = TimeSpan.FromTicks(c_durationTicks);
                 result.InsertKeyFrame(initialProgress, initialValue, initialEasingFunction);
-                return result;
-            }
-
-            CompositionSpriteShape CreateSpriteShape(CompositionGeometry geometry, Matrix3x2 transformMatrix)
-            {
-                var result = _c.CreateSpriteShape(geometry);
-                result.TransformMatrix = transformMatrix;
                 return result;
             }
 
@@ -202,22 +169,61 @@ namespace AnimatedVisuals
                 return result;
             }
 
-            // - Path 1.PathGeometry
+            // - - - - Layer aggregator
+            // - - ShapeGroup: Group 1 Offset:<63, 62.263>
             CanvasGeometry Geometry_0()
             {
                 CanvasGeometry result;
                 using (var builder = new CanvasPathBuilder(null))
                 {
                     builder.SetFilledRegionDetermination(CanvasFilledRegionDetermination.Winding);
-                    builder.BeginFigure(new Vector2(4.54699993F, -10.0220003F));
-                    builder.AddCubicBezier(new Vector2(2.79500008F, -10.0220003F), new Vector2(1.199F, -9.35299969F), new Vector2(0F, -8.25699997F));
-                    builder.AddCubicBezier(new Vector2(-1.199F, -9.35299969F), new Vector2(-2.79500008F, -10.0220003F), new Vector2(-4.54699993F, -10.0220003F));
-                    builder.AddCubicBezier(new Vector2(-8.27099991F, -10.0220003F), new Vector2(-11.2889996F, -7.00400019F), new Vector2(-11.2889996F, -3.27999997F));
-                    builder.AddCubicBezier(new Vector2(-11.2889996F, -1.13499999F), new Vector2(-10.5430002F, 0.64200002F), new Vector2(-9.13199997F, 2.32800007F));
-                    builder.AddCubicBezier(new Vector2(-7.72100019F, 4.01399994F), new Vector2(-0.00400000019F, 10.0220003F), new Vector2(-0.00400000019F, 10.0220003F));
-                    builder.AddCubicBezier(new Vector2(-0.00400000019F, 10.0220003F), new Vector2(7.76000023F, 4.03999996F), new Vector2(9.14000034F, 2.28800011F));
-                    builder.AddCubicBezier(new Vector2(10.467F, 0.602999985F), new Vector2(11.2889996F, -1.12199998F), new Vector2(11.2889996F, -3.27999997F));
-                    builder.AddCubicBezier(new Vector2(11.2889996F, -7.00400019F), new Vector2(8.27099991F, -10.0220003F), new Vector2(4.54699993F, -10.0220003F));
+                    builder.BeginFigure(new Vector2(21.7789993F, -19.1429996F));
+                    builder.AddCubicBezier(new Vector2(15.9779997F, -23.9950008F), new Vector2(7.43499994F, -23.2560005F), new Vector2(2.05599999F, -17.6669998F));
+                    builder.AddLine(new Vector2(0.0529999994F, -15.5570002F));
+                    builder.AddLine(new Vector2(-2.05699992F, -17.6669998F));
+                    builder.AddCubicBezier(new Vector2(-6.38100004F, -22.0960007F), new Vector2(-15.0299997F, -24.8379993F), new Vector2(-21.7800007F, -19.1429996F));
+                    builder.AddCubicBezier(new Vector2(-28.4239998F, -13.448F), new Vector2(-28.7399998F, -3.32299995F), new Vector2(-22.8339996F, 2.79399991F));
+                    builder.AddLine(new Vector2(-2.37299991F, 23.8889999F));
+                    builder.AddCubicBezier(new Vector2(-1.74000001F, 24.5209999F), new Vector2(-0.897000015F, 24.8369999F), new Vector2(-0.0529999994F, 24.8369999F));
+                    builder.AddCubicBezier(new Vector2(0.896000028F, 24.8369999F), new Vector2(1.74000001F, 24.5209999F), new Vector2(2.37299991F, 23.8889999F));
+                    builder.AddLine(new Vector2(22.8339996F, 2.79399991F));
+                    builder.AddCubicBezier(new Vector2(28.7399998F, -3.32299995F), new Vector2(28.4239998F, -13.448F), new Vector2(21.7789993F, -19.1429996F));
+                    builder.EndFigure(CanvasFigureLoop.Closed);
+                    builder.BeginFigure(new Vector2(20.4080009F, 0.474999994F));
+                    builder.AddLine(new Vector2(0.0529999994F, 21.5680008F));
+                    builder.AddLine(new Vector2(-20.4080009F, 0.474999994F));
+                    builder.AddCubicBezier(new Vector2(-24.4160004F, -3.74399996F), new Vector2(-25.2600002F, -11.6540003F), new Vector2(-19.5650005F, -16.5049992F));
+                    builder.AddCubicBezier(new Vector2(-13.7639999F, -21.4619999F), new Vector2(-7.01399994F, -17.8780003F), new Vector2(-4.4829998F, -15.3459997F));
+                    builder.AddLine(new Vector2(0.0529999994F, -10.7060003F));
+                    builder.AddLine(new Vector2(4.48199987F, -15.3459997F));
+                    builder.AddCubicBezier(new Vector2(6.90799999F, -17.8780003F), new Vector2(13.7629995F, -21.4619999F), new Vector2(19.5639992F, -16.5049992F));
+                    builder.AddCubicBezier(new Vector2(25.2600002F, -11.6540003F), new Vector2(24.4160004F, -3.74399996F), new Vector2(20.4080009F, 0.474999994F));
+                    builder.EndFigure(CanvasFigureLoop.Closed);
+                    result = CanvasGeometry.CreatePath(builder);
+                }
+                return result;
+            }
+
+            // - - - - Layer aggregator
+            // - - ShapeGroup: Group 1 Offset:<63, 62.263>
+            // - Path 1.PathGeometry
+            CanvasGeometry Geometry_1()
+            {
+                CanvasGeometry result;
+                using (var builder = new CanvasPathBuilder(null))
+                {
+                    builder.SetFilledRegionDetermination(CanvasFilledRegionDetermination.Winding);
+                    builder.BeginFigure(new Vector2(2.05699992F, -17.6650009F));
+                    builder.AddCubicBezier(new Vector2(7.43599987F, -23.2549992F), new Vector2(15.9790001F, -23.9939995F), new Vector2(21.7800007F, -19.1429996F));
+                    builder.AddCubicBezier(new Vector2(28.4239998F, -13.4469995F), new Vector2(28.7409992F, -3.32200003F), new Vector2(22.8339996F, 2.79399991F));
+                    builder.AddLine(new Vector2(2.37199998F, 23.8889999F));
+                    builder.AddCubicBezier(new Vector2(1.74000001F, 24.5219994F), new Vector2(0.896000028F, 24.8369999F), new Vector2(-0.0529999994F, 24.8369999F));
+                    builder.AddCubicBezier(new Vector2(-0.897000015F, 24.8369999F), new Vector2(-1.74100006F, 24.5219994F), new Vector2(-2.37400007F, 23.8889999F));
+                    builder.AddLine(new Vector2(-22.8349991F, 2.79399991F));
+                    builder.AddCubicBezier(new Vector2(-28.7409992F, -3.32200003F), new Vector2(-28.4230003F, -13.4469995F), new Vector2(-21.7789993F, -19.1429996F));
+                    builder.AddCubicBezier(new Vector2(-15.0290003F, -24.8379993F), new Vector2(-6.38199997F, -22.0949993F), new Vector2(-2.05699992F, -17.6650009F));
+                    builder.AddLine(new Vector2(0.0529999994F, -15.5570002F));
+                    builder.AddLine(new Vector2(2.05699992F, -17.6650009F));
                     builder.EndFigure(CanvasFigureLoop.Closed);
                     result = CanvasGeometry.CreatePath(builder);
                 }
@@ -225,154 +231,377 @@ namespace AnimatedVisuals
             }
 
             // - - - Layer aggregator
-            // - -  Offset:<400, 300>
-            // - Path 1.PathGeometry
-            CanvasGeometry Geometry_1()
+            // - ShapeGroup: Group 1 Offset:<63, 62.263>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_AlmostBlack_FF211B1C_to_TransparentAlmostBlack_00211B1C()
             {
-                CanvasGeometry result;
-                using (var builder = new CanvasPathBuilder(null))
-                {
-                    builder.BeginFigure(new Vector2(20.6229992F, -45.4529991F));
-                    builder.AddCubicBezier(new Vector2(12.6759996F, -45.4529991F), new Vector2(5.4380002F, -42.4199982F), new Vector2(0F, -37.4500008F));
-                    builder.AddCubicBezier(new Vector2(-5.4380002F, -42.4199982F), new Vector2(-12.6759996F, -45.4529991F), new Vector2(-20.6229992F, -45.4529991F));
-                    builder.AddCubicBezier(new Vector2(-37.5110016F, -45.4529991F), new Vector2(-51.2010002F, -31.7630005F), new Vector2(-51.2010002F, -14.875F));
-                    builder.AddCubicBezier(new Vector2(-51.2010002F, -5.14499998F), new Vector2(-47.8199997F, 2.91499996F), new Vector2(-41.4199982F, 10.5600004F));
-                    builder.AddCubicBezier(new Vector2(-35.0200005F, 18.2049999F), new Vector2(-0.0199999996F, 45.4529991F), new Vector2(-0.0199999996F, 45.4529991F));
-                    builder.AddCubicBezier(new Vector2(-0.0199999996F, 45.4529991F), new Vector2(35.1969986F, 18.3269997F), new Vector2(41.4550018F, 10.3789997F));
-                    builder.AddCubicBezier(new Vector2(47.4720001F, 2.73699999F), new Vector2(51.2010002F, -5.08599997F), new Vector2(51.2010002F, -14.875F));
-                    builder.AddCubicBezier(new Vector2(51.2010002F, -31.7630005F), new Vector2(37.5110016F, -45.4529991F), new Vector2(20.6229992F, -45.4529991F));
-                    builder.EndFigure(CanvasFigureLoop.Closed);
-                    result = CanvasGeometry.CreatePath(builder);
-                }
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0xFF, 0x21, 0x1B, 0x1C), StepThenHoldEasingFunction());
+                // AlmostBlack_FF211B1C
+                result.InsertKeyFrame(0.0666666701F, Color.FromArgb(0xFF, 0x21, 0x1B, 0x1C), HoldThenStepEasingFunction());
+                // TransparentAlmostBlack_00211B1C
+                result.InsertKeyFrame(0.116666667F, Color.FromArgb(0x00, 0x21, 0x1B, 0x1C), CubicBezierEasingFunction_0());
                 return result;
             }
 
-            // - - - Shape tree root for layer: Heart Fill
-            // - - ShapeGroup: Shape 1
-            // - Path 1.PathGeometry
-            CanvasGeometry Geometry_2()
+            // - - - Layer aggregator
+            // - ShapeGroup: Group 1 Offset:<63, 62.263>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_AlmostCrimson_FFDB3939()
             {
-                CanvasGeometry result;
-                using (var builder = new CanvasPathBuilder(null))
-                {
-                    builder.SetFilledRegionDetermination(CanvasFilledRegionDetermination.Winding);
-                    builder.BeginFigure(new Vector2(-0.0399999991F, 52.2480011F));
-                    builder.AddLine(new Vector2(-3.70600009F, 49.3930016F));
-                    builder.AddCubicBezier(new Vector2(-7.34100008F, 46.5639992F), new Vector2(-39.4000015F, 21.5230007F), new Vector2(-46.0200005F, 13.6169996F));
-                    builder.AddCubicBezier(new Vector2(-53.5439987F, 4.63100004F), new Vector2(-57.2019997F, -4.94799995F), new Vector2(-57.2019997F, -15.6680002F));
-                    builder.AddCubicBezier(new Vector2(-57.2019997F, -35.8380013F), new Vector2(-40.7929993F, -52.2480011F), new Vector2(-20.6229992F, -52.2480011F));
-                    builder.AddCubicBezier(new Vector2(-13.2049999F, -52.2480011F), new Vector2(-6.04500008F, -50.0139999F), new Vector2(0F, -45.8810005F));
-                    builder.AddCubicBezier(new Vector2(6.04400015F, -50.0149994F), new Vector2(13.2049999F, -52.2480011F), new Vector2(20.6229992F, -52.2480011F));
-                    builder.AddCubicBezier(new Vector2(40.7929993F, -52.2480011F), new Vector2(57.2019997F, -35.8380013F), new Vector2(57.2019997F, -15.6680002F));
-                    builder.AddCubicBezier(new Vector2(57.2019997F, -5.46600008F), new Vector2(53.6949997F, 3.73600006F), new Vector2(46.1689987F, 13.2959995F));
-                    builder.AddCubicBezier(new Vector2(39.6389999F, 21.5909996F), new Vector2(7.30600023F, 46.5900002F), new Vector2(3.64100003F, 49.4129982F));
-                    builder.AddLine(new Vector2(-0.0399999991F, 52.2480011F));
-                    builder.EndFigure(CanvasFigureLoop.Closed);
-                    result = CanvasGeometry.CreatePath(builder);
-                }
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.116666667F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // AlmostCrimson_FFDB3939
+                result.InsertKeyFrame(0.25F, Color.FromArgb(0xFF, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - - - Layer aggregator
+            // - ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_0()
+            {
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.266666681F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // SemiTransparentAlmostCrimson_99DB3939
+                result.InsertKeyFrame(0.633333325F, Color.FromArgb(0x99, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.800000012F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - - - Layer aggregator
+            // - ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_1()
+            {
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.233333334F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // SemiTransparentAlmostCrimson_99DB3939
+                result.InsertKeyFrame(0.600000024F, Color.FromArgb(0x99, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.766666651F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - - - Layer aggregator
+            // - ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_2()
+            {
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.183333337F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // SemiTransparentAlmostCrimson_99DB3939
+                result.InsertKeyFrame(0.550000012F, Color.FromArgb(0x99, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.716666639F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - - - Layer aggregator
+            // - ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_3()
+            {
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.150000006F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // SemiTransparentAlmostCrimson_99DB3939
+                result.InsertKeyFrame(0.516666651F, Color.FromArgb(0x99, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.683333337F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - - - Layer aggregator
+            // - ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_4()
+            {
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.200000003F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // SemiTransparentAlmostCrimson_CCDB3939
+                result.InsertKeyFrame(0.516666651F, Color.FromArgb(0xCC, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.783333361F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - - - Layer aggregator
+            // - ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_5()
+            {
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.166666672F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // SemiTransparentAlmostCrimson_CCDB3939
+                result.InsertKeyFrame(0.483333319F, Color.FromArgb(0xCC, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.75F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - - - Layer aggregator
+            // - ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_6()
+            {
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.13333334F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // SemiTransparentAlmostCrimson_CCDB3939
+                result.InsertKeyFrame(0.449999988F, Color.FromArgb(0xCC, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.716666639F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - - - Layer aggregator
+            // - ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            // Color
+            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_7()
+            {
+                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _stepThenHoldEasingFunction);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.100000001F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _holdThenStepEasingFunction);
+                // SemiTransparentAlmostCrimson_CCDB3939
+                result.InsertKeyFrame(0.416666657F, Color.FromArgb(0xCC, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
+                // TransparentAlmostCrimson_00DB3939
+                result.InsertKeyFrame(0.683333337F, Color.FromArgb(0x00, 0xDB, 0x39, 0x39), _cubicBezierEasingFunction_0);
                 return result;
             }
 
             // - - Layer aggregator
-            // -  Offset:<400, 300>
-            // Color
-            ColorKeyFrameAnimation ColorAnimation_AlmostBlack_FF1B1B1B_to_AlmostBlack_FF1B1B1B()
-            {
-                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0xFF, 0x1B, 0x1B, 0x1B), _stepThenHoldEasingFunction);
-                // AlmostBlack_FF1B1B1B
-                result.InsertKeyFrame(0.433333308F, Color.FromArgb(0xFF, 0x1B, 0x1B, 0x1B), _holdThenStepEasingFunction);
-                // TransparentAlmostBlack_001B1B1B
-                result.InsertKeyFrame(0.439999968F, Color.FromArgb(0x00, 0x1B, 0x1B, 0x1B), _cubicBezierEasingFunction_0);
-                // TransparentAlmostBlack_001B1B1B
-                result.InsertKeyFrame(0.926666617F, Color.FromArgb(0x00, 0x1B, 0x1B, 0x1B), _cubicBezierEasingFunction_0);
-                // AlmostBlack_FF1B1B1B
-                result.InsertKeyFrame(0.933333337F, Color.FromArgb(0xFF, 0x1B, 0x1B, 0x1B), _cubicBezierEasingFunction_0);
-                return result;
-            }
-
-            // Color
-            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B()
-            {
-                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0x1B, 0x1B, 0x1B), StepThenHoldEasingFunction());
-                // TransparentAlmostBlack_001B1B1B
-                result.InsertKeyFrame(0.393333316F, Color.FromArgb(0x00, 0x1B, 0x1B, 0x1B), HoldThenStepEasingFunction());
-                // SemiTransparentAlmostBlack_3F1B1B1B
-                result.InsertKeyFrame(0.413333327F, Color.FromArgb(0x3F, 0x1B, 0x1B, 0x1B), CubicBezierEasingFunction_0());
-                return result;
-            }
-
-            // - Layer aggregator
-            // Offset:<400, 300>
-            CompositionColorBrush AnimatedColorBrush_AlmostBlack_FF1B1B1B_to_AlmostBlack_FF1B1B1B()
+            // ShapeGroup: Group 1 Offset:<63, 62.263>
+            CompositionColorBrush AnimatedColorBrush_AlmostBlack_FF211B1C_to_TransparentAlmostBlack_00211B1C()
             {
                 var result = _c.CreateColorBrush();
-                StartProgressBoundAnimation(result, "Color", ColorAnimation_AlmostBlack_FF1B1B1B_to_AlmostBlack_FF1B1B1B(), _rootProgress);
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_AlmostBlack_FF211B1C_to_TransparentAlmostBlack_00211B1C(), RootProgress());
                 return result;
             }
 
-            CompositionColorBrush AnimatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B()
+            // - - Layer aggregator
+            // ShapeGroup: Group 1 Offset:<63, 62.263>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_AlmostCrimson_FFDB3939()
             {
-                var result = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B = _c.CreateColorBrush();
-                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B(), RootProgress());
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_AlmostCrimson_FFDB3939(), _rootProgress);
                 return result;
             }
 
-            // - Shape tree root for layer: Heart Fill
-            // ShapeGroup: Shape 1
-            CompositionColorBrush ColorBrush_AlmostBlack_FF1B1B1B()
+            // - - Layer aggregator
+            // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_0()
             {
-                return _c.CreateColorBrush(Color.FromArgb(0xFF, 0x1B, 0x1B, 0x1B));
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_0(), _rootProgress);
+                return result;
             }
 
-            // - - Shape tree root for layer: Heart Drain
-            // ShapeGroup: Rectangle 1 Offset:<-2.793, -0.793>
-            CompositionColorBrush ColorBrush_Red()
+            // - - Layer aggregator
+            // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_1()
             {
-                return _c.CreateColorBrush(Color.FromArgb(0xFF, 0xFF, 0x00, 0x00));
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_1(), _rootProgress);
+                return result;
             }
 
-            // - - Shape tree root for layer: Heart Drain
-            // ShapeGroup: Rectangle 1 Offset:<-2.793, -0.793>
-            CompositionColorBrush ColorBrush_White()
+            // - - Layer aggregator
+            // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_2()
             {
-                return _c.CreateColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF));
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_2(), _rootProgress);
+                return result;
             }
 
-            // Shape tree root for layer: Heart Drain
-            CompositionContainerShape ContainerShape()
+            // - - Layer aggregator
+            // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_3()
+            {
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_3(), _rootProgress);
+                return result;
+            }
+
+            // - - Layer aggregator
+            // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_4()
+            {
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_4(), _rootProgress);
+                return result;
+            }
+
+            // - - Layer aggregator
+            // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_5()
+            {
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_5(), _rootProgress);
+                return result;
+            }
+
+            // - - Layer aggregator
+            // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_6()
+            {
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_6(), _rootProgress);
+                return result;
+            }
+
+            // - - Layer aggregator
+            // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+            CompositionColorBrush AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_7()
+            {
+                var result = _c.CreateColorBrush();
+                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_7(), _rootProgress);
+                return result;
+            }
+
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_0()
             {
                 var result = _c.CreateContainerShape();
-                // ShapeGroup: Rectangle 1 Offset:<-2.793, -0.793>
-                result.Shapes.Add(SpriteShape_9());
-                result.StartAnimation("Offset", OffsetVector2Animation_7());
-                var controller = result.TryGetAnimationController("Offset");
-                controller.Pause();
-                BindProperty(controller, "Progress", "_.Progress*0.9677419", "_", _root);
+                result.CenterPoint = new Vector2(63F, 63F);
+                // ShapeGroup: Group 1 Offset:<63, 62.263>
+                result.Shapes.Add(SpriteShape_0());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_0(), _rootProgress);
                 return result;
             }
 
-            CompositionEffectBrush EffectBrush()
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_1()
             {
-                var compositeEffect = new CompositeEffect();
-                compositeEffect.Mode = CanvasComposite.DestinationIn;
-                compositeEffect.Sources.Add(new CompositionEffectSourceParameter("destination"));
-                compositeEffect.Sources.Add(new CompositionEffectSourceParameter("source"));
-                var effectFactory = _c.CreateEffectFactory(compositeEffect);
-                var result = effectFactory.CreateBrush();
-                result.SetSourceParameter("destination", SurfaceBrush_0());
-                result.SetSourceParameter("source", SurfaceBrush_1());
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(63F, 63F);
+                // ShapeGroup: Group 1 Offset:<63, 62.263>
+                result.Shapes.Add(SpriteShape_1());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_1(), _rootProgress);
                 return result;
             }
 
-            // Path 1.PathGeometry
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_2()
+            {
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(0F, -34.25F);
+                // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+                result.Shapes.Add(SpriteShape_2());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_2(), _rootProgress);
+                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_0(), _rootProgress);
+                return result;
+            }
+
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_3()
+            {
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(-0.25F, -33.75F);
+                // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+                result.Shapes.Add(SpriteShape_3());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_3(), _rootProgress);
+                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_1(), _rootProgress);
+                return result;
+            }
+
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_4()
+            {
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(0F, -34F);
+                // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+                result.Shapes.Add(SpriteShape_4());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_4(), _rootProgress);
+                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_2(), _rootProgress);
+                return result;
+            }
+
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_5()
+            {
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(-0.25F, -34F);
+                // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+                result.Shapes.Add(SpriteShape_5());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_5(), _rootProgress);
+                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_3(), _rootProgress);
+                return result;
+            }
+
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_6()
+            {
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(0F, -34.25F);
+                // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+                result.Shapes.Add(SpriteShape_6());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_6(), _rootProgress);
+                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_4(), _rootProgress);
+                return result;
+            }
+
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_7()
+            {
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(-0.25F, -34.25F);
+                // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+                result.Shapes.Add(SpriteShape_7());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_7(), _rootProgress);
+                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_5(), _rootProgress);
+                return result;
+            }
+
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_8()
+            {
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(-0.25F, -33.75F);
+                // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+                result.Shapes.Add(SpriteShape_8());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_8(), _rootProgress);
+                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_6(), _rootProgress);
+                return result;
+            }
+
+            // Layer aggregator
+            CompositionContainerShape ContainerShape_9()
+            {
+                var result = _c.CreateContainerShape();
+                result.CenterPoint = new Vector2(-0.25F, -34.75F);
+                // ShapeGroup: Ellipse 1 Offset:<-0.235, -34.489>
+                result.Shapes.Add(SpriteShape_9());
+                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_9(), _rootProgress);
+                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_7(), _rootProgress);
+                return result;
+            }
+
+            // Ellipse Path 1.EllipseGeometry
+            CompositionEllipseGeometry Ellipse_5p077()
+            {
+                var result = _ellipse_5p077 = _c.CreateEllipseGeometry();
+                result.Radius = new Vector2(5.07649994F, 5.07649994F);
+                return result;
+            }
+
+            // - - Layer aggregator
+            // ShapeGroup: Group 1 Offset:<63, 62.263>
             CompositionPathGeometry PathGeometry_0()
             {
-                var result = _pathGeometry_0 = _c.CreatePathGeometry(new CompositionPath(Geometry_0()));
+                var result = _c.CreatePathGeometry(new CompositionPath(Geometry_0()));
                 return result;
             }
 
-            // - Layer aggregator
-            // Offset:<400, 300>
+            // - - Layer aggregator
+            // ShapeGroup: Group 1 Offset:<63, 62.263>
             // Path 1.PathGeometry
             CompositionPathGeometry PathGeometry_1()
             {
@@ -380,182 +609,93 @@ namespace AnimatedVisuals
                 return result;
             }
 
-            // - Shape tree root for layer: Heart Fill
-            // ShapeGroup: Shape 1
-            // Path 1.PathGeometry
-            CompositionPathGeometry PathGeometry_2()
-            {
-                var result = _c.CreatePathGeometry(new CompositionPath(Geometry_2()));
-                return result;
-            }
-
-            // - - Shape tree root for layer: Heart Drain
-            // ShapeGroup: Rectangle 1 Offset:<-2.793, -0.793>
-            // Rectangle Path 1.RectangleGeometry
-            CompositionRectangleGeometry Rectangle_162p414()
-            {
-                var result = _c.CreateRectangleGeometry();
-                result.Offset = new Vector2(-81.2070007F, -81.2070007F);
-                result.Size = new Vector2(162.414001F, 162.414001F);
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
+            // - Layer aggregator
+            // ShapeGroup: Group 1 Offset:<63, 62.263>
             CompositionSpriteShape SpriteShape_0()
             {
-                var result = _c.CreateSpriteShape(PathGeometry_0());
-                result.FillBrush = AnimatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B();
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_0(), _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_0(), _rootProgress);
+                // Offset:<63, 62.263>
+                var result = CreateSpriteShape(PathGeometry_0(), new Matrix3x2(1F, 0F, 0F, 1F, 63F, 62.2630005F), AnimatedColorBrush_AlmostBlack_FF211B1C_to_TransparentAlmostBlack_00211B1C());
                 return result;
             }
 
-            // Layer aggregator
+            // - Layer aggregator
             // Path 1
             CompositionSpriteShape SpriteShape_1()
             {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_1(), _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_1(), _rootProgress);
+                // Offset:<63, 62.263>
+                var result = CreateSpriteShape(PathGeometry_1(), new Matrix3x2(1F, 0F, 0F, 1F, 63F, 62.2630005F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_AlmostCrimson_FFDB3939());
                 return result;
             }
 
-            // Layer aggregator
-            // Path 1
+            // - Layer aggregator
+            // Ellipse Path 1
             CompositionSpriteShape SpriteShape_2()
             {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_2(), _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_2(), _rootProgress);
+                // Offset:<-0.235, -34.489>
+                var result = CreateSpriteShape(Ellipse_5p077(), new Matrix3x2(1F, 0F, 0F, 1F, -0.234999999F, -34.4889984F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_0());
                 return result;
             }
 
-            // Layer aggregator
-            // Path 1
+            // - Layer aggregator
+            // Ellipse Path 1
             CompositionSpriteShape SpriteShape_3()
             {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", _scaleVector2Animation_0, _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_3(), _rootProgress);
+                // Offset:<-0.235, -34.489>
+                var result = CreateSpriteShape(_ellipse_5p077, new Matrix3x2(1F, 0F, 0F, 1F, -0.234999999F, -34.4889984F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_1());
                 return result;
             }
 
-            // Layer aggregator
-            // Path 1
+            // - Layer aggregator
+            // Ellipse Path 1
             CompositionSpriteShape SpriteShape_4()
             {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_3(), _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_4(), _rootProgress);
+                // Offset:<-0.235, -34.489>
+                var result = CreateSpriteShape(_ellipse_5p077, new Matrix3x2(1F, 0F, 0F, 1F, -0.234999999F, -34.4889984F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_2());
                 return result;
             }
 
-            // Layer aggregator
-            // Path 1
+            // - Layer aggregator
+            // Ellipse Path 1
             CompositionSpriteShape SpriteShape_5()
             {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", _scaleVector2Animation_3, _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_5(), _rootProgress);
+                // Offset:<-0.235, -34.489>
+                var result = CreateSpriteShape(_ellipse_5p077, new Matrix3x2(1F, 0F, 0F, 1F, -0.234999999F, -34.4889984F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_3());
                 return result;
             }
 
-            // Layer aggregator
-            // Path 1
+            // - Layer aggregator
+            // Ellipse Path 1
             CompositionSpriteShape SpriteShape_6()
             {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", _scaleVector2Animation_0, _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_6(), _rootProgress);
+                // Offset:<-0.235, -34.489>
+                var result = CreateSpriteShape(_ellipse_5p077, new Matrix3x2(1F, 0F, 0F, 1F, -0.234999999F, -34.4889984F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_4());
                 return result;
             }
 
-            // Layer aggregator
-            // Path 1
+            // - Layer aggregator
+            // Ellipse Path 1
             CompositionSpriteShape SpriteShape_7()
             {
-                // Offset:<400, 300>
-                var result = CreateSpriteShape(PathGeometry_1(), new Matrix3x2(1F, 0F, 0F, 1F, 400F, 300F));
-                result.StrokeBrush = AnimatedColorBrush_AlmostBlack_FF1B1B1B_to_AlmostBlack_FF1B1B1B();
-                result.StrokeMiterLimit = 2F;
-                result.StrokeThickness = 12F;
+                // Offset:<-0.235, -34.489>
+                var result = CreateSpriteShape(_ellipse_5p077, new Matrix3x2(1F, 0F, 0F, 1F, -0.234999999F, -34.4889984F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_5());
                 return result;
             }
 
-            // Shape tree root for layer: Heart Fill
-            // Path 1
+            // - Layer aggregator
+            // Ellipse Path 1
             CompositionSpriteShape SpriteShape_8()
             {
-                var result = _c.CreateSpriteShape(PathGeometry_2());
-                result.Offset = new Vector2(400F, 300F);
-                result.FillBrush = ColorBrush_AlmostBlack_FF1B1B1B();
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_4(), _rootProgress);
+                // Offset:<-0.235, -34.489>
+                var result = CreateSpriteShape(_ellipse_5p077, new Matrix3x2(1F, 0F, 0F, 1F, -0.234999999F, -34.4889984F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_6());
                 return result;
             }
 
-            // - Shape tree root for layer: Heart Drain
-            // Rectangle Path 1
+            // - Layer aggregator
+            // Ellipse Path 1
             CompositionSpriteShape SpriteShape_9()
             {
-                // Offset:<-2.793, -0.793>
-                var result = CreateSpriteShape(Rectangle_162p414(), new Matrix3x2(1F, 0F, 0F, 1F, -2.79299998F, -0.792999983F), ColorBrush_Red());
-                result.StrokeBrush = ColorBrush_White();
-                result.StrokeMiterLimit = 2F;
-                return result;
-            }
-
-            CompositionSurfaceBrush SurfaceBrush_0()
-            {
-                var result = _c.CreateSurfaceBrush();
-                result.Surface = VisualSurface_0();
-                return result;
-            }
-
-            CompositionSurfaceBrush SurfaceBrush_1()
-            {
-                var result = _c.CreateSurfaceBrush();
-                result.Surface = VisualSurface_1();
-                return result;
-            }
-
-            CompositionVisualSurface VisualSurface_0()
-            {
-                var result = _c.CreateVisualSurface();
-                result.SourceVisual = ContainerVisual_0();
-                result.SourceSize = new Vector2(800F, 600F);
-                return result;
-            }
-
-            CompositionVisualSurface VisualSurface_1()
-            {
-                var result = _c.CreateVisualSurface();
-                result.SourceVisual = ContainerVisual_1();
-                result.SourceSize = new Vector2(800F, 600F);
-                return result;
-            }
-
-            ContainerVisual ContainerVisual_0()
-            {
-                var result = _c.CreateContainerVisual();
-                result.BorderMode = CompositionBorderMode.Soft;
-                // Shape tree root for layer: Heart Fill
-                result.Children.InsertAtTop(ShapeVisual_1());
-                return result;
-            }
-
-            ContainerVisual ContainerVisual_1()
-            {
-                var result = _c.CreateContainerVisual();
-                result.BorderMode = CompositionBorderMode.Soft;
-                // Shape tree root for layer: Heart Drain
-                result.Children.InsertAtTop(ShapeVisual_2());
+                // Offset:<-0.235, -34.489>
+                var result = CreateSpriteShape(_ellipse_5p077, new Matrix3x2(1F, 0F, 0F, 1F, -0.234999999F, -34.4889984F), AnimatedColorBrush_TransparentAlmostCrimson_00DB3939_to_TransparentAlmostCrimson_00DB3939_7());
                 return result;
             }
 
@@ -569,30 +709,29 @@ namespace AnimatedVisuals
                 propertySet.InsertScalar("t1", 0F);
                 propertySet.InsertScalar("t2", 0F);
                 propertySet.InsertScalar("t3", 0F);
-                var children = result.Children;
+                propertySet.InsertScalar("t4", 0F);
+                propertySet.InsertScalar("t5", 0F);
+                propertySet.InsertScalar("t6", 0F);
                 // Layer aggregator
-                children.InsertAtTop(ShapeVisual_0());
-                children.InsertAtTop(SpriteVisual_0());
+                result.Children.InsertAtTop(ShapeVisual_0());
                 StartProgressBoundAnimation(propertySet, "t0", t0ScalarAnimation_0_to_1(), _rootProgress);
                 StartProgressBoundAnimation(propertySet, "t1", t1ScalarAnimation_0_to_1(), _rootProgress);
                 StartProgressBoundAnimation(propertySet, "t2", t2ScalarAnimation_0_to_1(), _rootProgress);
                 StartProgressBoundAnimation(propertySet, "t3", t3ScalarAnimation_0_to_1(), _rootProgress);
+                StartProgressBoundAnimation(propertySet, "t4", t4ScalarAnimation_0_to_1(), _rootProgress);
+                StartProgressBoundAnimation(propertySet, "t5", t5ScalarAnimation_0_to_1(), _rootProgress);
+                StartProgressBoundAnimation(propertySet, "t6", t6ScalarAnimation_0_to_1(), _rootProgress);
                 return result;
             }
 
             CubicBezierEasingFunction CubicBezierEasingFunction_0()
             {
-                return _cubicBezierEasingFunction_0 = _c.CreateCubicBezierEasingFunction(new Vector2(0.166999996F, 0.166999996F), new Vector2(0.833000004F, 0.833000004F));
+                return _cubicBezierEasingFunction_0 = _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.666999996F, 1F));
             }
 
             CubicBezierEasingFunction CubicBezierEasingFunction_1()
             {
-                return _cubicBezierEasingFunction_1 = _c.CreateCubicBezierEasingFunction(new Vector2(0.166999996F, 0.166999996F), new Vector2(0.666999996F, 1F));
-            }
-
-            CubicBezierEasingFunction CubicBezierEasingFunction_2()
-            {
-                return _cubicBezierEasingFunction_2 = _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.666999996F, 1F));
+                return _cubicBezierEasingFunction_1 = _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.186000004F, 1F));
             }
 
             ExpressionAnimation RootProgress()
@@ -604,35 +743,57 @@ namespace AnimatedVisuals
 
             ScalarKeyFrameAnimation t0ScalarAnimation_0_to_1()
             {
-                var result = CreateScalarKeyFrameAnimation(0.400000006F, 0F, _stepThenHoldEasingFunction);
+                var result = CreateScalarKeyFrameAnimation(0.26666671F, 0F, _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.49999994F, 1F, _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.49999997F, 0F, _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.666666627F, 1F, _cubicBezierEasingFunction_2);
+                result.InsertKeyFrame(0.633333266F, 1F, CubicBezierEasingFunction_1());
                 return result;
             }
 
             ScalarKeyFrameAnimation t1ScalarAnimation_0_to_1()
             {
-                var result = CreateScalarKeyFrameAnimation(0.49999997F, 0F, _stepThenHoldEasingFunction);
+                var result = CreateScalarKeyFrameAnimation(0.233333349F, 0F, _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.699999928F, 1F, _cubicBezierEasingFunction_2);
+                result.InsertKeyFrame(0.599999964F, 1F, _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.187000006F, 1F)));
                 return result;
             }
 
             ScalarKeyFrameAnimation t2ScalarAnimation_0_to_1()
             {
-                var result = CreateScalarKeyFrameAnimation(0.49999997F, 0F, _stepThenHoldEasingFunction);
+                var result = CreateScalarKeyFrameAnimation(0.183333352F, 0F, _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.633333266F, 1F, _cubicBezierEasingFunction_2);
+                result.InsertKeyFrame(0.549999952F, 1F, _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.187999994F, 1F)));
                 return result;
             }
 
             ScalarKeyFrameAnimation t3ScalarAnimation_0_to_1()
             {
-                var result = CreateScalarKeyFrameAnimation(0.49999997F, 0F, _stepThenHoldEasingFunction);
+                var result = CreateScalarKeyFrameAnimation(0.150000021F, 0F, _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.73333329F, 1F, _cubicBezierEasingFunction_2);
+                result.InsertKeyFrame(0.516666591F, 1F, _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.182999998F, 1F)));
+                return result;
+            }
+
+            ScalarKeyFrameAnimation t4ScalarAnimation_0_to_1()
+            {
+                var result = CreateScalarKeyFrameAnimation(0.200000018F, 0F, _stepThenHoldEasingFunction);
+                result.SetReferenceParameter("_", _root);
+                result.InsertKeyFrame(0.516666591F, 1F, _cubicBezierEasingFunction_1);
+                return result;
+            }
+
+            ScalarKeyFrameAnimation t5ScalarAnimation_0_to_1()
+            {
+                var result = CreateScalarKeyFrameAnimation(0.166666687F, 0F, _stepThenHoldEasingFunction);
+                result.SetReferenceParameter("_", _root);
+                result.InsertKeyFrame(0.48333329F, 1F, _cubicBezierEasingFunction_1);
+                return result;
+            }
+
+            ScalarKeyFrameAnimation t6ScalarAnimation_0_to_1()
+            {
+                var result = CreateScalarKeyFrameAnimation(0.133333355F, 0F, _stepThenHoldEasingFunction);
+                result.SetReferenceParameter("_", _root);
+                result.InsertKeyFrame(0.449999958F, 1F, _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.244000003F, 1F)));
                 return result;
             }
 
@@ -640,51 +801,18 @@ namespace AnimatedVisuals
             ShapeVisual ShapeVisual_0()
             {
                 var result = _c.CreateShapeVisual();
-                result.Size = new Vector2(800F, 600F);
+                result.Size = new Vector2(126F, 126F);
                 var shapes = result.Shapes;
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_0());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_1());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_2());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_3());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_4());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_5());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_6());
-                // Offset:<400, 300>
-                shapes.Add(SpriteShape_7());
-                return result;
-            }
-
-            // Shape tree root for layer: Heart Fill
-            ShapeVisual ShapeVisual_1()
-            {
-                var result = _c.CreateShapeVisual();
-                result.Size = new Vector2(800F, 600F);
-                // ShapeGroup: Shape 1
-                result.Shapes.Add(SpriteShape_8());
-                return result;
-            }
-
-            // Shape tree root for layer: Heart Drain
-            ShapeVisual ShapeVisual_2()
-            {
-                var result = _c.CreateShapeVisual();
-                result.Size = new Vector2(800F, 600F);
-                result.Shapes.Add(ContainerShape());
-                return result;
-            }
-
-            SpriteVisual SpriteVisual_0()
-            {
-                var result = _c.CreateSpriteVisual();
-                result.Size = new Vector2(800F, 600F);
-                result.Brush = EffectBrush();
+                shapes.Add(ContainerShape_0());
+                shapes.Add(ContainerShape_1());
+                shapes.Add(ContainerShape_2());
+                shapes.Add(ContainerShape_3());
+                shapes.Add(ContainerShape_4());
+                shapes.Add(ContainerShape_5());
+                shapes.Add(ContainerShape_6());
+                shapes.Add(ContainerShape_7());
+                shapes.Add(ContainerShape_8());
+                shapes.Add(ContainerShape_9());
                 return result;
             }
 
@@ -703,170 +831,197 @@ namespace AnimatedVisuals
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Offset
             Vector2KeyFrameAnimation OffsetVector2Animation_0()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(63.5F, 95.5F), _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(413.042,303.3957))+(3*(1-_.t0)*Square(_.t0)*Vector2(461.4912,345.3271))+(Pow(_.t0,3)*Vector2(485.542,341.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.666666627F, "(Pow(1-_.t0,3)*Vector2(485.542,341.729))+(3*Square(1-_.t0)*_.t0*Vector2(506.7086,338.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(535.542,281.729))+(Pow(_.t0,3)*Vector2(511.542,192.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.666666687F, new Vector2(511.541992F, 192.729004F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.266666681F, new Vector2(63.5F, 95.5F), _holdThenStepEasingFunction);
+                result.InsertExpressionKeyFrame(0.633333266F, "(Pow(1-_.t0,3)*Vector2(63.5,95.5))+(3*Square(1-_.t0)*_.t0*Vector2(58.125,89.667))+(3*(1-_.t0)*Square(_.t0)*Vector2(35.875,65.333))+(Pow(_.t0,3)*Vector2(31.25,60.5))", _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.633333325F, new Vector2(31.25F, 60.5F), _stepThenHoldEasingFunction);
                 return result;
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Offset
             Vector2KeyFrameAnimation OffsetVector2Animation_1()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(62.75F, 95.75F), _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(384.542,320.729))+(3*(1-_.t0)*Square(_.t0)*Vector2(342.3452,368.5926))+(Pow(_.t0,3)*Vector2(305.042,366.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.699999928F, "(Pow(1-_.t1,3)*Vector2(305.042,366.729))+(3*Square(1-_.t1)*_.t1*Vector2(272.2289,365.0898))+(3*(1-_.t1)*Square(_.t1)*Vector2(252.542,304.229))+(Pow(_.t1,3)*Vector2(258.542,224.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.699999988F, new Vector2(258.541992F, 224.729004F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.233333334F, new Vector2(62.75F, 95.75F), _holdThenStepEasingFunction);
+                result.InsertExpressionKeyFrame(0.599999964F, "(Pow(1-_.t1,3)*Vector2(62.75,95.75))+(3*Square(1-_.t1)*_.t1*Vector2(57.542,100.667))+(3*(1-_.t1)*Square(_.t1)*Vector2(36.375,120.917))+(Pow(_.t1,3)*Vector2(31.5,125.25))", _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.600000024F, new Vector2(31.5F, 125.25F), _stepThenHoldEasingFunction);
                 return result;
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Offset
             Vector2KeyFrameAnimation OffsetVector2Animation_2()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(63F, 96.25F), _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(411.8753,284.3957))+(3*(1-_.t0)*Square(_.t0)*Vector2(469.9173,250.4667))+(Pow(_.t0,3)*Vector2(478.542,227.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.633333266F, "(Pow(1-_.t2,3)*Vector2(478.542,227.729))+(3*Square(1-_.t2)*_.t2*Vector2(487.7086,203.5623))+(3*(1-_.t2)*Square(_.t2)*Vector2(493.542,149.729))+(Pow(_.t2,3)*Vector2(475.542,111.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.633333325F, new Vector2(475.541992F, 111.728996F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.183333337F, new Vector2(63F, 96.25F), _holdThenStepEasingFunction);
+                result.InsertExpressionKeyFrame(0.549999952F, "(Pow(1-_.t2,3)*Vector2(63,96.25))+(3*Square(1-_.t2)*_.t2*Vector2(68.833,101.5))+(3*(1-_.t2)*Square(_.t2)*Vector2(93.083,123.5))+(Pow(_.t2,3)*Vector2(98,127.75))", _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.550000012F, new Vector2(98F, 127.75F), _stepThenHoldEasingFunction);
                 return result;
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Offset
             Vector2KeyFrameAnimation OffsetVector2Animation_3()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(63.25F, 95.5F), _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(383.3753,293.729))+(3*(1-_.t0)*Square(_.t0)*Vector2(325.7291,299.8727))+(Pow(_.t0,3)*Vector2(307.542,283.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.666666627F, "(Pow(1-_.t0,3)*Vector2(307.542,283.729))+(3*Square(1-_.t0)*_.t0*Vector2(292.7086,270.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(261.542,216.729))+(Pow(_.t0,3)*Vector2(304.542,130.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.666666687F, new Vector2(304.541992F, 130.729004F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.150000006F, new Vector2(63.25F, 95.5F), _holdThenStepEasingFunction);
+                result.InsertExpressionKeyFrame(0.516666591F, "(Pow(1-_.t3,3)*Vector2(63.25,95.5))+(3*Square(1-_.t3)*_.t3*Vector2(68.833,89.375))+(3*(1-_.t3)*Square(_.t3)*Vector2(92.083,63.625))+(Pow(_.t3,3)*Vector2(96.75,58.75))", _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.516666651F, new Vector2(96.75F, 58.75F), _stepThenHoldEasingFunction);
                 return result;
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Offset
             Vector2KeyFrameAnimation OffsetVector2Animation_4()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(63.5F, 95.5F), _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(406.7086,314.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(401.9507,385.1677))+(Pow(_.t0,3)*Vector2(447.542,408.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.73333329F, "(Pow(1-_.t3,3)*Vector2(447.542,408.729))+(3*Square(1-_.t3)*_.t3*Vector2(478.6139,424.7868))+(3*(1-_.t3)*Square(_.t3)*Vector2(534.542,390.729))+(Pow(_.t3,3)*Vector2(536.542,311.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.733333349F, new Vector2(536.541992F, 311.729004F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.200000003F, new Vector2(63.5F, 95.5F), _holdThenStepEasingFunction);
+                result.InsertExpressionKeyFrame(0.516666591F, "(Pow(1-_.t4,3)*Vector2(63.5,95.5))+(3*Square(1-_.t4)*_.t4*Vector2(56.708,95.25))+(3*(1-_.t4)*Square(_.t4)*Vector2(29.542,94.25))+(Pow(_.t4,3)*Vector2(22.75,94))", _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.516666651F, new Vector2(22.75F, 94F), _stepThenHoldEasingFunction);
                 return result;
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Offset
             Vector2KeyFrameAnimation OffsetVector2Animation_5()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(62.75F, 95.75F), _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(393.8753,281.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(377.4143,234.0562))+(Pow(_.t0,3)*Vector2(370.542,210.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.73333329F, "(Pow(1-_.t3,3)*Vector2(370.542,210.729))+(3*Square(1-_.t3)*_.t3*Vector2(358.7086,170.5623))+(3*(1-_.t3)*Square(_.t3)*Vector2(365.542,120.729))+(Pow(_.t3,3)*Vector2(387.542,71.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.733333349F, new Vector2(387.541992F, 71.7289963F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.166666672F, new Vector2(62.75F, 95.75F), _holdThenStepEasingFunction);
+                result.InsertExpressionKeyFrame(0.48333329F, "(Pow(1-_.t5,3)*Vector2(62.75,95.75))+(3*Square(1-_.t5)*_.t5*Vector2(62.792,102.292))+(3*(1-_.t5)*Square(_.t5)*Vector2(62.958,128.458))+(Pow(_.t5,3)*Vector2(63,135))", _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.483333319F, new Vector2(63F, 135F), _stepThenHoldEasingFunction);
                 return result;
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Offset
             Vector2KeyFrameAnimation OffsetVector2Animation_6()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(63F, 95.75F), _stepThenHoldEasingFunction);
                 result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(391.8753,317.0623))+(3*(1-_.t0)*Square(_.t0)*Vector2(382.6991,420.9319))+(Pow(_.t0,3)*Vector2(358.542,423.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.666666627F, "(Pow(1-_.t0,3)*Vector2(358.542,423.729))+(3*Square(1-_.t0)*_.t0*Vector2(342.7086,425.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(318.542,388.729))+(Pow(_.t0,3)*Vector2(320.542,326.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.666666687F, new Vector2(320.541992F, 326.729004F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.13333334F, new Vector2(63F, 95.75F), _holdThenStepEasingFunction);
+                result.InsertExpressionKeyFrame(0.449999958F, "(Pow(1-_.t6,3)*Vector2(63,95.75))+(3*Square(1-_.t6)*_.t6*Vector2(70.25,95.542))+(3*(1-_.t6)*Square(_.t6)*Vector2(99.25,94.708))+(Pow(_.t6,3)*Vector2(106.5,94.5))", _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.449999988F, new Vector2(106.5F, 94.5F), _stepThenHoldEasingFunction);
                 return result;
             }
 
-            // - Shape tree root for layer: Heart Drain
+            // - Layer aggregator
             // Offset
             Vector2KeyFrameAnimation OffsetVector2Animation_7()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(400F, 300F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.90322578F, new Vector2(400F, 300F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(1F, new Vector2(400F, 440F), _c.CreateCubicBezierEasingFunction(new Vector2(0.166999996F, 0.166999996F), new Vector2(0F, 1F)));
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(62.75F, 95.25F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.100000001F, new Vector2(62.75F, 95.25F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.416666657F, new Vector2(62.75F, 56.75F), _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.172999993F, 1F)));
                 return result;
             }
 
+            // - Layer aggregator
             // Scale
             Vector2KeyFrameAnimation ScaleVector2Animation_0()
             {
-                var result = _scaleVector2Animation_0 = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.49999997F, new Vector2(1.25F, 1.25F), CubicBezierEasingFunction_1());
-                result.InsertKeyFrame(0.666666687F, new Vector2(0F, 0F), CubicBezierEasingFunction_2());
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.0666666701F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.116666667F, new Vector2(0.800000012F, 0.800000012F), _cubicBezierEasingFunction_0);
                 return result;
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Scale
             Vector2KeyFrameAnimation ScaleVector2Animation_1()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.49999997F, new Vector2(1.25F, 1.25F), _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.699999988F, new Vector2(0F, 0F), _cubicBezierEasingFunction_2);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(0.850000024F, 0.850000024F), _stepThenHoldEasingFunction);
+                result.InsertKeyFrame(0.116666667F, new Vector2(0.850000024F, 0.850000024F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.183333337F, new Vector2(0.899999976F, 0.899999976F), _cubicBezierEasingFunction_0);
+                result.InsertKeyFrame(0.25F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
                 return result;
             }
 
             // - Layer aggregator
-            // ShapeGroup: Shape 1
             // Scale
             Vector2KeyFrameAnimation ScaleVector2Animation_2()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.49999997F, new Vector2(1.25F, 1.25F), _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.633333325F, new Vector2(0F, 0F), _cubicBezierEasingFunction_2);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1.37F, 1.37F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.266666681F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
+                result.InsertKeyFrame(0.633333325F, new Vector2(0.600000024F, 0.600000024F), _cubicBezierEasingFunction_0);
                 return result;
             }
 
+            // - Layer aggregator
             // Scale
             Vector2KeyFrameAnimation ScaleVector2Animation_3()
             {
-                var result = _scaleVector2Animation_3 = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.49999997F, new Vector2(1.25F, 1.25F), _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.733333349F, new Vector2(0F, 0F), _cubicBezierEasingFunction_2);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1.37F, 1.37F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.233333334F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
+                result.InsertKeyFrame(0.600000024F, new Vector2(0.600000024F, 0.600000024F), _cubicBezierEasingFunction_0);
                 return result;
             }
 
-            // - Shape tree root for layer: Heart Fill
-            // ShapeGroup: Shape 1
+            // - Layer aggregator
             // Scale
             Vector2KeyFrameAnimation ScaleVector2Animation_4()
             {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(0F, 0F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(0F, 0F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.433333308F, new Vector2(1.29999995F, 1.29999995F), _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.453333348F, new Vector2(1F, 1F), _cubicBezierEasingFunction_2);
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1.37F, 1.37F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.183333337F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
+                result.InsertKeyFrame(0.550000012F, new Vector2(0.600000024F, 0.600000024F), _cubicBezierEasingFunction_0);
                 return result;
             }
 
-            internal AnimatedVisual_UAPv8(
+            // - Layer aggregator
+            // Scale
+            Vector2KeyFrameAnimation ScaleVector2Animation_5()
+            {
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1.37F, 1.37F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.150000006F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
+                result.InsertKeyFrame(0.516666651F, new Vector2(0.600000024F, 0.600000024F), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - Layer aggregator
+            // Scale
+            Vector2KeyFrameAnimation ScaleVector2Animation_6()
+            {
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1.37F, 1.37F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.200000003F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - Layer aggregator
+            // Scale
+            Vector2KeyFrameAnimation ScaleVector2Animation_7()
+            {
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1.37F, 1.37F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.166666672F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - Layer aggregator
+            // Scale
+            Vector2KeyFrameAnimation ScaleVector2Animation_8()
+            {
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1.37F, 1.37F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.13333334F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            // - Layer aggregator
+            // Scale
+            Vector2KeyFrameAnimation ScaleVector2Animation_9()
+            {
+                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1.37F, 1.37F), _holdThenStepEasingFunction);
+                result.InsertKeyFrame(0.100000001F, new Vector2(1F, 1F), _cubicBezierEasingFunction_0);
+                return result;
+            }
+
+            internal AnimatedVisual(
                 Compositor compositor
                 )
             {
@@ -877,616 +1032,7 @@ namespace AnimatedVisuals
 
             public Visual RootVisual => _root;
             public TimeSpan Duration => TimeSpan.FromTicks(c_durationTicks);
-            public Vector2 Size => new Vector2(800F, 600F);
-            void IDisposable.Dispose() => _root?.Dispose();
-
-            internal static bool IsRuntimeCompatible()
-            {
-                return Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8);
-            }
-        }
-
-        sealed class AnimatedVisual_UAPv7 : ILottieVisual
-        {
-            const long c_durationTicks = 50050050;
-            readonly Compositor _c;
-            readonly ExpressionAnimation _reusableExpressionAnimation;
-            CompositionColorBrush _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-            CompositionPathGeometry _pathGeometry_0;
-            ContainerVisual _root;
-            CubicBezierEasingFunction _cubicBezierEasingFunction_0;
-            CubicBezierEasingFunction _cubicBezierEasingFunction_1;
-            CubicBezierEasingFunction _cubicBezierEasingFunction_2;
-            ExpressionAnimation _rootProgress;
-            StepEasingFunction _holdThenStepEasingFunction;
-            StepEasingFunction _stepThenHoldEasingFunction;
-            Vector2KeyFrameAnimation _scaleVector2Animation_0;
-            Vector2KeyFrameAnimation _scaleVector2Animation_3;
-
-            static void StartProgressBoundAnimation(
-                CompositionObject target,
-                string animatedPropertyName,
-                CompositionAnimation animation,
-                ExpressionAnimation controllerProgressExpression)
-            {
-                target.StartAnimation(animatedPropertyName, animation);
-                var controller = target.TryGetAnimationController(animatedPropertyName);
-                controller.Pause();
-                controller.StartAnimation("Progress", controllerProgressExpression);
-            }
-
-            ColorKeyFrameAnimation CreateColorKeyFrameAnimation(float initialProgress, Color initialValue, CompositionEasingFunction initialEasingFunction)
-            {
-                var result = _c.CreateColorKeyFrameAnimation();
-                result.Duration = TimeSpan.FromTicks(c_durationTicks);
-                result.InterpolationColorSpace = CompositionColorSpace.Rgb;
-                result.InsertKeyFrame(initialProgress, initialValue, initialEasingFunction);
-                return result;
-            }
-
-            ScalarKeyFrameAnimation CreateScalarKeyFrameAnimation(float initialProgress, float initialValue, CompositionEasingFunction initialEasingFunction)
-            {
-                var result = _c.CreateScalarKeyFrameAnimation();
-                result.Duration = TimeSpan.FromTicks(c_durationTicks);
-                result.InsertKeyFrame(initialProgress, initialValue, initialEasingFunction);
-                return result;
-            }
-
-            Vector2KeyFrameAnimation CreateVector2KeyFrameAnimation(float initialProgress, Vector2 initialValue, CompositionEasingFunction initialEasingFunction)
-            {
-                var result = _c.CreateVector2KeyFrameAnimation();
-                result.Duration = TimeSpan.FromTicks(c_durationTicks);
-                result.InsertKeyFrame(initialProgress, initialValue, initialEasingFunction);
-                return result;
-            }
-
-            CompositionSpriteShape CreateSpriteShape(CompositionGeometry geometry, Matrix3x2 transformMatrix)
-            {
-                var result = _c.CreateSpriteShape(geometry);
-                result.TransformMatrix = transformMatrix;
-                return result;
-            }
-
-            // - Path 1.PathGeometry
-            CanvasGeometry Geometry_0()
-            {
-                CanvasGeometry result;
-                using (var builder = new CanvasPathBuilder(null))
-                {
-                    builder.SetFilledRegionDetermination(CanvasFilledRegionDetermination.Winding);
-                    builder.BeginFigure(new Vector2(4.54699993F, -10.0220003F));
-                    builder.AddCubicBezier(new Vector2(2.79500008F, -10.0220003F), new Vector2(1.199F, -9.35299969F), new Vector2(0F, -8.25699997F));
-                    builder.AddCubicBezier(new Vector2(-1.199F, -9.35299969F), new Vector2(-2.79500008F, -10.0220003F), new Vector2(-4.54699993F, -10.0220003F));
-                    builder.AddCubicBezier(new Vector2(-8.27099991F, -10.0220003F), new Vector2(-11.2889996F, -7.00400019F), new Vector2(-11.2889996F, -3.27999997F));
-                    builder.AddCubicBezier(new Vector2(-11.2889996F, -1.13499999F), new Vector2(-10.5430002F, 0.64200002F), new Vector2(-9.13199997F, 2.32800007F));
-                    builder.AddCubicBezier(new Vector2(-7.72100019F, 4.01399994F), new Vector2(-0.00400000019F, 10.0220003F), new Vector2(-0.00400000019F, 10.0220003F));
-                    builder.AddCubicBezier(new Vector2(-0.00400000019F, 10.0220003F), new Vector2(7.76000023F, 4.03999996F), new Vector2(9.14000034F, 2.28800011F));
-                    builder.AddCubicBezier(new Vector2(10.467F, 0.602999985F), new Vector2(11.2889996F, -1.12199998F), new Vector2(11.2889996F, -3.27999997F));
-                    builder.AddCubicBezier(new Vector2(11.2889996F, -7.00400019F), new Vector2(8.27099991F, -10.0220003F), new Vector2(4.54699993F, -10.0220003F));
-                    builder.EndFigure(CanvasFigureLoop.Closed);
-                    result = CanvasGeometry.CreatePath(builder);
-                }
-                return result;
-            }
-
-            // - - - Layer aggregator
-            // - -  Offset:<400, 300>
-            // - Path 1.PathGeometry
-            CanvasGeometry Geometry_1()
-            {
-                CanvasGeometry result;
-                using (var builder = new CanvasPathBuilder(null))
-                {
-                    builder.BeginFigure(new Vector2(20.6229992F, -45.4529991F));
-                    builder.AddCubicBezier(new Vector2(12.6759996F, -45.4529991F), new Vector2(5.4380002F, -42.4199982F), new Vector2(0F, -37.4500008F));
-                    builder.AddCubicBezier(new Vector2(-5.4380002F, -42.4199982F), new Vector2(-12.6759996F, -45.4529991F), new Vector2(-20.6229992F, -45.4529991F));
-                    builder.AddCubicBezier(new Vector2(-37.5110016F, -45.4529991F), new Vector2(-51.2010002F, -31.7630005F), new Vector2(-51.2010002F, -14.875F));
-                    builder.AddCubicBezier(new Vector2(-51.2010002F, -5.14499998F), new Vector2(-47.8199997F, 2.91499996F), new Vector2(-41.4199982F, 10.5600004F));
-                    builder.AddCubicBezier(new Vector2(-35.0200005F, 18.2049999F), new Vector2(-0.0199999996F, 45.4529991F), new Vector2(-0.0199999996F, 45.4529991F));
-                    builder.AddCubicBezier(new Vector2(-0.0199999996F, 45.4529991F), new Vector2(35.1969986F, 18.3269997F), new Vector2(41.4550018F, 10.3789997F));
-                    builder.AddCubicBezier(new Vector2(47.4720001F, 2.73699999F), new Vector2(51.2010002F, -5.08599997F), new Vector2(51.2010002F, -14.875F));
-                    builder.AddCubicBezier(new Vector2(51.2010002F, -31.7630005F), new Vector2(37.5110016F, -45.4529991F), new Vector2(20.6229992F, -45.4529991F));
-                    builder.EndFigure(CanvasFigureLoop.Closed);
-                    result = CanvasGeometry.CreatePath(builder);
-                }
-                return result;
-            }
-
-            // - - - Shape tree root for layer: Heart Fill
-            // - - ShapeGroup: Shape 1
-            // - Path 1.PathGeometry
-            CanvasGeometry Geometry_2()
-            {
-                CanvasGeometry result;
-                using (var builder = new CanvasPathBuilder(null))
-                {
-                    builder.SetFilledRegionDetermination(CanvasFilledRegionDetermination.Winding);
-                    builder.BeginFigure(new Vector2(-0.0399999991F, 52.2480011F));
-                    builder.AddLine(new Vector2(-3.70600009F, 49.3930016F));
-                    builder.AddCubicBezier(new Vector2(-7.34100008F, 46.5639992F), new Vector2(-39.4000015F, 21.5230007F), new Vector2(-46.0200005F, 13.6169996F));
-                    builder.AddCubicBezier(new Vector2(-53.5439987F, 4.63100004F), new Vector2(-57.2019997F, -4.94799995F), new Vector2(-57.2019997F, -15.6680002F));
-                    builder.AddCubicBezier(new Vector2(-57.2019997F, -35.8380013F), new Vector2(-40.7929993F, -52.2480011F), new Vector2(-20.6229992F, -52.2480011F));
-                    builder.AddCubicBezier(new Vector2(-13.2049999F, -52.2480011F), new Vector2(-6.04500008F, -50.0139999F), new Vector2(0F, -45.8810005F));
-                    builder.AddCubicBezier(new Vector2(6.04400015F, -50.0149994F), new Vector2(13.2049999F, -52.2480011F), new Vector2(20.6229992F, -52.2480011F));
-                    builder.AddCubicBezier(new Vector2(40.7929993F, -52.2480011F), new Vector2(57.2019997F, -35.8380013F), new Vector2(57.2019997F, -15.6680002F));
-                    builder.AddCubicBezier(new Vector2(57.2019997F, -5.46600008F), new Vector2(53.6949997F, 3.73600006F), new Vector2(46.1689987F, 13.2959995F));
-                    builder.AddCubicBezier(new Vector2(39.6389999F, 21.5909996F), new Vector2(7.30600023F, 46.5900002F), new Vector2(3.64100003F, 49.4129982F));
-                    builder.AddLine(new Vector2(-0.0399999991F, 52.2480011F));
-                    builder.EndFigure(CanvasFigureLoop.Closed);
-                    result = CanvasGeometry.CreatePath(builder);
-                }
-                return result;
-            }
-
-            // - - Layer aggregator
-            // -  Offset:<400, 300>
-            // Color
-            ColorKeyFrameAnimation ColorAnimation_AlmostBlack_FF1B1B1B_to_AlmostBlack_FF1B1B1B()
-            {
-                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0xFF, 0x1B, 0x1B, 0x1B), _stepThenHoldEasingFunction);
-                // AlmostBlack_FF1B1B1B
-                result.InsertKeyFrame(0.433333308F, Color.FromArgb(0xFF, 0x1B, 0x1B, 0x1B), _holdThenStepEasingFunction);
-                // TransparentAlmostBlack_001B1B1B
-                result.InsertKeyFrame(0.439999968F, Color.FromArgb(0x00, 0x1B, 0x1B, 0x1B), _cubicBezierEasingFunction_0);
-                // TransparentAlmostBlack_001B1B1B
-                result.InsertKeyFrame(0.926666617F, Color.FromArgb(0x00, 0x1B, 0x1B, 0x1B), _cubicBezierEasingFunction_0);
-                // AlmostBlack_FF1B1B1B
-                result.InsertKeyFrame(0.933333337F, Color.FromArgb(0xFF, 0x1B, 0x1B, 0x1B), _cubicBezierEasingFunction_0);
-                return result;
-            }
-
-            // Color
-            ColorKeyFrameAnimation ColorAnimation_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B()
-            {
-                var result = CreateColorKeyFrameAnimation(0F, Color.FromArgb(0x00, 0x1B, 0x1B, 0x1B), StepThenHoldEasingFunction());
-                // TransparentAlmostBlack_001B1B1B
-                result.InsertKeyFrame(0.393333316F, Color.FromArgb(0x00, 0x1B, 0x1B, 0x1B), HoldThenStepEasingFunction());
-                // SemiTransparentAlmostBlack_3F1B1B1B
-                result.InsertKeyFrame(0.413333327F, Color.FromArgb(0x3F, 0x1B, 0x1B, 0x1B), CubicBezierEasingFunction_0());
-                return result;
-            }
-
-            // - Layer aggregator
-            // Offset:<400, 300>
-            CompositionColorBrush AnimatedColorBrush_AlmostBlack_FF1B1B1B_to_AlmostBlack_FF1B1B1B()
-            {
-                var result = _c.CreateColorBrush();
-                StartProgressBoundAnimation(result, "Color", ColorAnimation_AlmostBlack_FF1B1B1B_to_AlmostBlack_FF1B1B1B(), _rootProgress);
-                return result;
-            }
-
-            CompositionColorBrush AnimatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B()
-            {
-                var result = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B = _c.CreateColorBrush();
-                StartProgressBoundAnimation(result, "Color", ColorAnimation_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B(), RootProgress());
-                return result;
-            }
-
-            // - Shape tree root for layer: Heart Fill
-            // ShapeGroup: Shape 1
-            CompositionColorBrush ColorBrush_AlmostBlack_FF1B1B1B()
-            {
-                return _c.CreateColorBrush(Color.FromArgb(0xFF, 0x1B, 0x1B, 0x1B));
-            }
-
-            // Path 1.PathGeometry
-            CompositionPathGeometry PathGeometry_0()
-            {
-                var result = _pathGeometry_0 = _c.CreatePathGeometry(new CompositionPath(Geometry_0()));
-                return result;
-            }
-
-            // - Layer aggregator
-            // Offset:<400, 300>
-            // Path 1.PathGeometry
-            CompositionPathGeometry PathGeometry_1()
-            {
-                var result = _c.CreatePathGeometry(new CompositionPath(Geometry_1()));
-                return result;
-            }
-
-            // - Shape tree root for layer: Heart Fill
-            // ShapeGroup: Shape 1
-            // Path 1.PathGeometry
-            CompositionPathGeometry PathGeometry_2()
-            {
-                var result = _c.CreatePathGeometry(new CompositionPath(Geometry_2()));
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
-            CompositionSpriteShape SpriteShape_0()
-            {
-                var result = _c.CreateSpriteShape(PathGeometry_0());
-                result.FillBrush = AnimatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B();
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_0(), _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_0(), _rootProgress);
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
-            CompositionSpriteShape SpriteShape_1()
-            {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_1(), _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_1(), _rootProgress);
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
-            CompositionSpriteShape SpriteShape_2()
-            {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_2(), _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_2(), _rootProgress);
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
-            CompositionSpriteShape SpriteShape_3()
-            {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", _scaleVector2Animation_0, _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_3(), _rootProgress);
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
-            CompositionSpriteShape SpriteShape_4()
-            {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_3(), _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_4(), _rootProgress);
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
-            CompositionSpriteShape SpriteShape_5()
-            {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", _scaleVector2Animation_3, _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_5(), _rootProgress);
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
-            CompositionSpriteShape SpriteShape_6()
-            {
-                var result = _c.CreateSpriteShape(_pathGeometry_0);
-                result.FillBrush = _animatedColorBrush_TransparentAlmostBlack_001B1B1B_to_SemiTransparentAlmostBlack_3F1B1B1B;
-                StartProgressBoundAnimation(result, "Scale", _scaleVector2Animation_0, _rootProgress);
-                StartProgressBoundAnimation(result, "Offset", OffsetVector2Animation_6(), _rootProgress);
-                return result;
-            }
-
-            // Layer aggregator
-            // Path 1
-            CompositionSpriteShape SpriteShape_7()
-            {
-                // Offset:<400, 300>
-                var result = CreateSpriteShape(PathGeometry_1(), new Matrix3x2(1F, 0F, 0F, 1F, 400F, 300F));
-                result.StrokeBrush = AnimatedColorBrush_AlmostBlack_FF1B1B1B_to_AlmostBlack_FF1B1B1B();
-                result.StrokeMiterLimit = 2F;
-                result.StrokeThickness = 12F;
-                return result;
-            }
-
-            // Shape tree root for layer: Heart Fill
-            // Path 1
-            CompositionSpriteShape SpriteShape_8()
-            {
-                var result = _c.CreateSpriteShape(PathGeometry_2());
-                result.Offset = new Vector2(400F, 300F);
-                result.FillBrush = ColorBrush_AlmostBlack_FF1B1B1B();
-                StartProgressBoundAnimation(result, "Scale", ScaleVector2Animation_4(), _rootProgress);
-                return result;
-            }
-
-            // The root of the composition.
-            ContainerVisual Root()
-            {
-                var result = _root = _c.CreateContainerVisual();
-                var propertySet = result.Properties;
-                propertySet.InsertScalar("Progress", 0F);
-                propertySet.InsertScalar("t0", 0F);
-                propertySet.InsertScalar("t1", 0F);
-                propertySet.InsertScalar("t2", 0F);
-                propertySet.InsertScalar("t3", 0F);
-                var children = result.Children;
-                // Layer aggregator
-                children.InsertAtTop(ShapeVisual_0());
-                // Shape tree root for layer: Heart Fill
-                children.InsertAtTop(ShapeVisual_1());
-                StartProgressBoundAnimation(propertySet, "t0", t0ScalarAnimation_0_to_1(), _rootProgress);
-                StartProgressBoundAnimation(propertySet, "t1", t1ScalarAnimation_0_to_1(), _rootProgress);
-                StartProgressBoundAnimation(propertySet, "t2", t2ScalarAnimation_0_to_1(), _rootProgress);
-                StartProgressBoundAnimation(propertySet, "t3", t3ScalarAnimation_0_to_1(), _rootProgress);
-                return result;
-            }
-
-            CubicBezierEasingFunction CubicBezierEasingFunction_0()
-            {
-                return _cubicBezierEasingFunction_0 = _c.CreateCubicBezierEasingFunction(new Vector2(0.166999996F, 0.166999996F), new Vector2(0.833000004F, 0.833000004F));
-            }
-
-            CubicBezierEasingFunction CubicBezierEasingFunction_1()
-            {
-                return _cubicBezierEasingFunction_1 = _c.CreateCubicBezierEasingFunction(new Vector2(0.166999996F, 0.166999996F), new Vector2(0.666999996F, 1F));
-            }
-
-            CubicBezierEasingFunction CubicBezierEasingFunction_2()
-            {
-                return _cubicBezierEasingFunction_2 = _c.CreateCubicBezierEasingFunction(new Vector2(0.333000004F, 0F), new Vector2(0.666999996F, 1F));
-            }
-
-            ExpressionAnimation RootProgress()
-            {
-                var result = _rootProgress = _c.CreateExpressionAnimation("_.Progress");
-                result.SetReferenceParameter("_", _root);
-                return result;
-            }
-
-            ScalarKeyFrameAnimation t0ScalarAnimation_0_to_1()
-            {
-                var result = CreateScalarKeyFrameAnimation(0.400000006F, 0F, _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.49999994F, 1F, _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.49999997F, 0F, _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.666666627F, 1F, _cubicBezierEasingFunction_2);
-                return result;
-            }
-
-            ScalarKeyFrameAnimation t1ScalarAnimation_0_to_1()
-            {
-                var result = CreateScalarKeyFrameAnimation(0.49999997F, 0F, _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.699999928F, 1F, _cubicBezierEasingFunction_2);
-                return result;
-            }
-
-            ScalarKeyFrameAnimation t2ScalarAnimation_0_to_1()
-            {
-                var result = CreateScalarKeyFrameAnimation(0.49999997F, 0F, _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.633333266F, 1F, _cubicBezierEasingFunction_2);
-                return result;
-            }
-
-            ScalarKeyFrameAnimation t3ScalarAnimation_0_to_1()
-            {
-                var result = CreateScalarKeyFrameAnimation(0.49999997F, 0F, _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.73333329F, 1F, _cubicBezierEasingFunction_2);
-                return result;
-            }
-
-            // Layer aggregator
-            ShapeVisual ShapeVisual_0()
-            {
-                var result = _c.CreateShapeVisual();
-                result.Size = new Vector2(800F, 600F);
-                var shapes = result.Shapes;
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_0());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_1());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_2());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_3());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_4());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_5());
-                // ShapeGroup: Shape 1
-                shapes.Add(SpriteShape_6());
-                // Offset:<400, 300>
-                shapes.Add(SpriteShape_7());
-                return result;
-            }
-
-            // Shape tree root for layer: Heart Fill
-            ShapeVisual ShapeVisual_1()
-            {
-                var result = _c.CreateShapeVisual();
-                result.Size = new Vector2(800F, 600F);
-                // ShapeGroup: Shape 1
-                result.Shapes.Add(SpriteShape_8());
-                return result;
-            }
-
-            StepEasingFunction HoldThenStepEasingFunction()
-            {
-                var result = _holdThenStepEasingFunction = _c.CreateStepEasingFunction();
-                result.IsFinalStepSingleFrame = true;
-                return result;
-            }
-
-            StepEasingFunction StepThenHoldEasingFunction()
-            {
-                var result = _stepThenHoldEasingFunction = _c.CreateStepEasingFunction();
-                result.IsInitialStepSingleFrame = true;
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Offset
-            Vector2KeyFrameAnimation OffsetVector2Animation_0()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(413.042,303.3957))+(3*(1-_.t0)*Square(_.t0)*Vector2(461.4912,345.3271))+(Pow(_.t0,3)*Vector2(485.542,341.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.666666627F, "(Pow(1-_.t0,3)*Vector2(485.542,341.729))+(3*Square(1-_.t0)*_.t0*Vector2(506.7086,338.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(535.542,281.729))+(Pow(_.t0,3)*Vector2(511.542,192.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.666666687F, new Vector2(511.541992F, 192.729004F), _stepThenHoldEasingFunction);
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Offset
-            Vector2KeyFrameAnimation OffsetVector2Animation_1()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(384.542,320.729))+(3*(1-_.t0)*Square(_.t0)*Vector2(342.3452,368.5926))+(Pow(_.t0,3)*Vector2(305.042,366.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.699999928F, "(Pow(1-_.t1,3)*Vector2(305.042,366.729))+(3*Square(1-_.t1)*_.t1*Vector2(272.2289,365.0898))+(3*(1-_.t1)*Square(_.t1)*Vector2(252.542,304.229))+(Pow(_.t1,3)*Vector2(258.542,224.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.699999988F, new Vector2(258.541992F, 224.729004F), _stepThenHoldEasingFunction);
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Offset
-            Vector2KeyFrameAnimation OffsetVector2Animation_2()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(411.8753,284.3957))+(3*(1-_.t0)*Square(_.t0)*Vector2(469.9173,250.4667))+(Pow(_.t0,3)*Vector2(478.542,227.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.633333266F, "(Pow(1-_.t2,3)*Vector2(478.542,227.729))+(3*Square(1-_.t2)*_.t2*Vector2(487.7086,203.5623))+(3*(1-_.t2)*Square(_.t2)*Vector2(493.542,149.729))+(Pow(_.t2,3)*Vector2(475.542,111.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.633333325F, new Vector2(475.541992F, 111.728996F), _stepThenHoldEasingFunction);
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Offset
-            Vector2KeyFrameAnimation OffsetVector2Animation_3()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(383.3753,293.729))+(3*(1-_.t0)*Square(_.t0)*Vector2(325.7291,299.8727))+(Pow(_.t0,3)*Vector2(307.542,283.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.666666627F, "(Pow(1-_.t0,3)*Vector2(307.542,283.729))+(3*Square(1-_.t0)*_.t0*Vector2(292.7086,270.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(261.542,216.729))+(Pow(_.t0,3)*Vector2(304.542,130.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.666666687F, new Vector2(304.541992F, 130.729004F), _stepThenHoldEasingFunction);
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Offset
-            Vector2KeyFrameAnimation OffsetVector2Animation_4()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(406.7086,314.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(401.9507,385.1677))+(Pow(_.t0,3)*Vector2(447.542,408.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.73333329F, "(Pow(1-_.t3,3)*Vector2(447.542,408.729))+(3*Square(1-_.t3)*_.t3*Vector2(478.6139,424.7868))+(3*(1-_.t3)*Square(_.t3)*Vector2(534.542,390.729))+(Pow(_.t3,3)*Vector2(536.542,311.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.733333349F, new Vector2(536.541992F, 311.729004F), _stepThenHoldEasingFunction);
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Offset
-            Vector2KeyFrameAnimation OffsetVector2Animation_5()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(393.8753,281.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(377.4143,234.0562))+(Pow(_.t0,3)*Vector2(370.542,210.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.73333329F, "(Pow(1-_.t3,3)*Vector2(370.542,210.729))+(3*Square(1-_.t3)*_.t3*Vector2(358.7086,170.5623))+(3*(1-_.t3)*Square(_.t3)*Vector2(365.542,120.729))+(Pow(_.t3,3)*Vector2(387.542,71.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.733333349F, new Vector2(387.541992F, 71.7289963F), _stepThenHoldEasingFunction);
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Offset
-            Vector2KeyFrameAnimation OffsetVector2Animation_6()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(398.541992F, 295.729004F), _stepThenHoldEasingFunction);
-                result.SetReferenceParameter("_", _root);
-                result.InsertKeyFrame(0.399999976F, new Vector2(398.541992F, 295.729004F), _holdThenStepEasingFunction);
-                result.InsertExpressionKeyFrame(0.49999994F, "(Pow(1-_.t0,3)*Vector2(398.542,295.729))+(3*Square(1-_.t0)*_.t0*Vector2(391.8753,317.0623))+(3*(1-_.t0)*Square(_.t0)*Vector2(382.6991,420.9319))+(Pow(_.t0,3)*Vector2(358.542,423.729))", _stepThenHoldEasingFunction);
-                result.InsertExpressionKeyFrame(0.666666627F, "(Pow(1-_.t0,3)*Vector2(358.542,423.729))+(3*Square(1-_.t0)*_.t0*Vector2(342.7086,425.5623))+(3*(1-_.t0)*Square(_.t0)*Vector2(318.542,388.729))+(Pow(_.t0,3)*Vector2(320.542,326.729))", _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.666666687F, new Vector2(320.541992F, 326.729004F), _stepThenHoldEasingFunction);
-                return result;
-            }
-
-            // Scale
-            Vector2KeyFrameAnimation ScaleVector2Animation_0()
-            {
-                var result = _scaleVector2Animation_0 = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.49999997F, new Vector2(1.25F, 1.25F), CubicBezierEasingFunction_1());
-                result.InsertKeyFrame(0.666666687F, new Vector2(0F, 0F), CubicBezierEasingFunction_2());
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Scale
-            Vector2KeyFrameAnimation ScaleVector2Animation_1()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.49999997F, new Vector2(1.25F, 1.25F), _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.699999988F, new Vector2(0F, 0F), _cubicBezierEasingFunction_2);
-                return result;
-            }
-
-            // - Layer aggregator
-            // ShapeGroup: Shape 1
-            // Scale
-            Vector2KeyFrameAnimation ScaleVector2Animation_2()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.49999997F, new Vector2(1.25F, 1.25F), _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.633333325F, new Vector2(0F, 0F), _cubicBezierEasingFunction_2);
-                return result;
-            }
-
-            // Scale
-            Vector2KeyFrameAnimation ScaleVector2Animation_3()
-            {
-                var result = _scaleVector2Animation_3 = CreateVector2KeyFrameAnimation(0F, new Vector2(1F, 1F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(1F, 1F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.49999997F, new Vector2(1.25F, 1.25F), _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.733333349F, new Vector2(0F, 0F), _cubicBezierEasingFunction_2);
-                return result;
-            }
-
-            // - Shape tree root for layer: Heart Fill
-            // ShapeGroup: Shape 1
-            // Scale
-            Vector2KeyFrameAnimation ScaleVector2Animation_4()
-            {
-                var result = CreateVector2KeyFrameAnimation(0F, new Vector2(0F, 0F), _stepThenHoldEasingFunction);
-                result.InsertKeyFrame(0.399999976F, new Vector2(0F, 0F), _holdThenStepEasingFunction);
-                result.InsertKeyFrame(0.433333308F, new Vector2(1.29999995F, 1.29999995F), _cubicBezierEasingFunction_1);
-                result.InsertKeyFrame(0.453333348F, new Vector2(1F, 1F), _cubicBezierEasingFunction_2);
-                return result;
-            }
-
-            internal AnimatedVisual_UAPv7(
-                Compositor compositor
-                )
-            {
-                _c = compositor;
-                _reusableExpressionAnimation = compositor.CreateExpressionAnimation();
-                Root();
-            }
-
-            public Visual RootVisual => _root;
-            public TimeSpan Duration => TimeSpan.FromTicks(c_durationTicks);
-            public Vector2 Size => new Vector2(800F, 600F);
+            public Vector2 Size => new Vector2(126F, 126F);
             void IDisposable.Dispose() => _root?.Dispose();
 
             internal static bool IsRuntimeCompatible()
