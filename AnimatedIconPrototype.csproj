@@ -123,6 +123,7 @@
     <Compile Include="AnimatedProgressUI.cs" />
     <Compile Include="AnimatedIcon.cs" />
     <Compile Include="LottieAnimations\FingerHello.cs" />
+    <Compile Include="LottieAnimations\Heart.cs" />
     <Compile Include="LottieAnimations\LegoLoader.cs" />
     <Compile Include="LottieAnimations\QA_AirplaneMode.cs" />
     <Compile Include="LottieAnimations\QA_BatterySaver.cs" />
