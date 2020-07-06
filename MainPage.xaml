@@ -70,6 +70,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition Width="40"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
@@ -298,17 +299,15 @@
                     </local:AnimatedIcon>
                 </StackPanel>
 
-                <StackPanel Grid.Column="15" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+                <StackPanel Grid.Column="16" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
                     <local:AnimatedIcon
                             x:Name="Heart"
                             Glyph="&#xEB51;"
-                            Toggle="true"
+                            Toggle="True"
                             FontSize="40">
-                        </local:AnimatedIcon>
-                    <ToggleButton Background="White">
-                        <FontIcon Glyph="&#xEB51;" 
+                    </local:AnimatedIcon>
+                    <FontIcon Glyph="&#xEB51;" 
                               FontSize="40"/>
-                    </ToggleButton>
                 </StackPanel>
             </Grid>
         </StackPanel>

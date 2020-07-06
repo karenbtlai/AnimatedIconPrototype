@@ -55,7 +55,7 @@ namespace AnimatedIconPrototype
         // with the IsIconController=true attached property.
         UIElement _controller;
 
-        bool _toggleIsPressed = true;
+        bool _toggleIsPressed;
 
         public AnimatedIcon()
         {
@@ -195,12 +195,7 @@ namespace AnimatedIconPrototype
 
         private static void OnToggleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var animatedIcon = (AnimatedIcon)d;
 
-            if (animatedIcon.Toggle)
-            {
-                animatedIcon.UpdateToggleState();
-            }
         }
 
         // Sets the progress of the Lottie animation to the value of
