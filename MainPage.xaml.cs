@@ -14,23 +14,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     public sealed partial class MainPage : Page
     {
         public MainPage()
         {
             this.InitializeComponent();
-        }
-
-        private void OnPointerOverAnimatedIcon_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            OnPointerOverAnimatedIcon.IsAnimating = true;
-        }
-
-        private void OnPointerOverAnimatedIcon_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            OnPointerOverAnimatedIcon.IsAnimating = false;
         }
     }
 

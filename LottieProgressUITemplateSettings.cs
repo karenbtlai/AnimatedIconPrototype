@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     public class LottieProgressUITemplateSettings : DependencyObject
     {

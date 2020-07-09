@@ -2,7 +2,7 @@
 using System;
 using Windows.UI.Xaml;
 
-namespace ProgressUIPrototype
+namespace AnimatedIconPrototype
 {
     public class AnimatedVisualPlayerProposed : AnimatedVisualPlayer
     {
